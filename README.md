@@ -50,7 +50,7 @@ import httpClient from "@/lib/client";
 
 function App() {
   async function doSomething() {
-    console.log("api result: ", await httpClient.get("/boards"));
+    console.log("api result: ", await httpClient.get("/users"));
   }
   return (
     <div>
