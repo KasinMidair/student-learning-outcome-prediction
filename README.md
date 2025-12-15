@@ -39,7 +39,8 @@ Trang web giờ đang ở http://localhost:3000.
 ## Cách gọi api
 
 Trước hết ta xem có API nào để gọi. Có thể truy cập trang http://localhost:5000/api để xem danh sách tất cả API của backend.
-<img width="1609" height="1012" alt="image" src="https://github.com/user-attachments/assets/15294ae1-5039-4380-926f-3b0024ce9391" />
+<img width="1901" height="855" alt="image" src="https://github.com/user-attachments/assets/275aae87-6c8c-4f32-99fc-69d292be88ee" />
+
 
 Sau khi biết có API thì sử dụng httpClient từ `@/lib/client`
 
