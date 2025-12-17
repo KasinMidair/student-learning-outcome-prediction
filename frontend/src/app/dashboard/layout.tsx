@@ -31,8 +31,7 @@ export default function DashboardLayout({
             object-left-bottom
             absolute
             z-0
-            pointer-events-none
-            opacity-80"
+            pointer-events-none"
         />
         <header className="relative z-10 flex justify-end items-center p-6  pb-4">
           <div className="flex bg-zinc-900 rounded-full p-1">

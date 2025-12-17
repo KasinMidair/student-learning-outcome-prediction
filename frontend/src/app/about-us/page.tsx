@@ -12,7 +12,7 @@ import {
 
 export default function AboutUsPage() {
   return (
-    <div className=" w-full font-sans overflow-x-hidden bg-[var(--background-gradient)] ">
+    <div className=" w-full font-sans overflow-x-hidden bg-[image:var(--background-gradient)] dark ">
       {/* --- HERO --- */}
       <section className=" relative text-white py-20 px-40 md:px-12 flex flex-col items-center justify-center text-center">
         <Image
@@ -20,12 +20,12 @@ export default function AboutUsPage() {
           alt="Hero background"
           fill
           priority
-          className="object-cover object-bottom scale-105 origin-bottom"
+          className="object-cover object-bottom scale-105 origin-bottom "
         />
         {/* Decorative Snowflakes */}
         <Snowflake className="absolute top-10 left-10 w-8 h-8 opacity-50 animate-pulse" />
         <Snowflake className="absolute bottom-10 right-20 w-12 h-12 opacity-40 animate-bounce" />
-        <Snowflake className="absolute top-20 right-1/4 w-6 h-6 opacity-60" />
+        <Snowflake className="absolute top-20 right-1/4 w-6 h-6 opacity-60 " />
 
         <div className="z-10 max-w-4xl mt-10">
           <div className="flex items-center justify-center gap-2 mb-4 opacity-90">

@@ -2,7 +2,7 @@
   "name": "student-learning-outcome",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"pnpm --filter api-server start:dev\" \"pnpm --filter frontend dev\""
+    "dev": "\"pnpm --filter frontend dev\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
