@@ -27,7 +27,7 @@ export const Tab = ({
       onClick={onClick}
       style={{ clipPath: clipPathUrl }}
       className={`
-        relative flex items-center gap-2 pt-3 pb-2 text-sm font-bold transition-all duration-200
+        relative flex items-center gap-2 pt-3 pb-2 text-md font-bold transition-all duration-200
         ${paddingClass}
         -ml-8 first:ml-0
 

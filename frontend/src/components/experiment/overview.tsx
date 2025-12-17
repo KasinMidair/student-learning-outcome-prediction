@@ -82,7 +82,7 @@ export const Overview = ({ data }: { data: any[] }) => {
                 borderRadius: "8px",
                 fontSize: "12px",
               }}
-              formatter={(value: number) => value.toFixed(3)}
+              formatter={(value: number) => value.toFixed(5)}
             />
             <Bar
               dataKey="BalancedAcc"

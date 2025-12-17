@@ -77,7 +77,7 @@ export default function ExperimentPage() {
         >
           <div className="animate-in fade-in zoom-in-95 duration-300 h-full pt-2">
             {activeTab === "overview" && <Overview data={currentData} />}
-            {activeTab === "phase" && <Phase />}
+            {activeTab === "phase" && <Phase version={selectedVersion} />}
           </div>
         </div>
       </div>
