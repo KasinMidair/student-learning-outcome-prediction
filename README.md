@@ -36,9 +36,5 @@ pnpm dev
 
 Trang web giờ đang ở http://localhost:3000.
 
-## các file data đặt trong /data nhé
-  );
-}
+#### các file data đặt trong /data nhé
 
-export default App;
-```
