@@ -12,9 +12,9 @@ interface StatCardProps {
 
 export function StatCard({ label, value, subtext, icon: Icon }: StatCardProps) {
   return (
-    <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_70%,#303231_100%)] border-0 text-white shadow-xxl shadow-black/30 w-full relative overflow-hidden">
+    <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_70%,#323734_100%)] border-0 text-white shadow-xl shadow-black/40 w-full relative overflow-hidden">
       <CardContent className="relative p-6 pt-5 flex flex-col text-white">
-        <div className="absolute top-6 left-7 w-6 h-6 rounded-full bg-[#FFFCE6]/100 blur-[20px]" />
+        <div className="absolute top-6 left-7 w-6 h-6 rounded-full bg-[#FFFCE6]/50 blur-[20px]" />
 
         <div className="relative z-10 w-9 h-9 rounded-lg flex items-center justify-center text-white mb-3">
           <Icon size={24} strokeWidth={1.8} />
