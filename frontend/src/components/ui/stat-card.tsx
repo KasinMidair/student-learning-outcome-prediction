@@ -17,7 +17,7 @@ export function StatCard({ label, value, subtext, icon: Icon }: StatCardProps) {
         <div className="absolute top-6 left-7 w-6 h-6 rounded-full bg-[#FFFCE6]/100 blur-[20px]" />
 
         <div className="relative z-10 w-9 h-9 rounded-lg flex items-center justify-center text-white mb-3">
-          <Icon size={24} strokeWidth={1.8} className="text-white" />
+          <Icon size={24} strokeWidth={1.8} />
         </div>
 
         <h3 className="text-[22px] leading-tight font-semibold tracking-tight">

@@ -59,12 +59,12 @@ export default function ExperimentPage() {
 
         <div
           className={`
-            bg-[#292B2A]
+            bg-[linear-gradient(to_bottom,#2A2C2B_70%,#303231_100%)] border-0 text-white shadow-xxl shadow-black/30
             rounded-b-xl rounded-tr-xl rounded-tl-none 
-            p-6 md:p-8 
-            min-h-[500px] 
+            p-4 md:p-6 
+            min-h-[400px] 
             relative z-0
-            shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8)]
+
           `}
         >
           <div className="animate-in fade-in zoom-in-95 duration-300 h-full pt-2">

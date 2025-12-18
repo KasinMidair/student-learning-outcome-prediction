@@ -44,7 +44,7 @@ export default function DashboardLayout({
           </Avatar>
         </header>
 
-        <div className=" relative z-10 p-14  pt-0 overflow-y-auto flex-1">
+        <div className=" relative z-10 p-16  pb-4 pt-0 overflow-y-auto flex-1">
           {children}
         </div>
       </main>

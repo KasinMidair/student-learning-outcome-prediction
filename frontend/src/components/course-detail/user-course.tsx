@@ -9,7 +9,7 @@ import {
   Eye,
   MoreHorizontal,
 } from "lucide-react";
-import { Input } from "@/components/ui/input"; // Đảm bảo đã import Input
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -23,7 +23,7 @@ import { Shape } from "@/components/ui/shape";
 import { Tab } from "@/components/ui/tab";
 import { Button } from "@/components/ui/button";
 
-export default function CoursesPage() {
+export default function UserCourse(id) {
   const router = useRouter();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -101,17 +101,7 @@ export default function CoursesPage() {
     <div className="  text-white font-sans relative overflow-hidden">
       <Shape />
       <div className="w-full mx-auto">
-        <div className="flex items-center w-full pl-0 justify-between relative z-10">
-          <div>
-            <Tab
-              variant="start"
-              active={true}
-              onClick={() => {}}
-              label="courses"
-              icon={<Activity size={16} />}
-            />
-          </div>
-
+        <div className="flex items-center w-full pl-0 justify-end relative z-10">
           <div className="relative w-64 md:w-80  ">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
             <Input
