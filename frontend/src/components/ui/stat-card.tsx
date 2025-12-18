@@ -12,7 +12,7 @@ interface StatCardProps {
 
 export function StatCard({ label, value, subtext, icon: Icon }: StatCardProps) {
   return (
-    <Card className="relative overflow-hidden border border-zinc-700/30 rounded-2xl bg-[#292B2A] shadow-[0_12px_32px_-14px_rgba(0,0,0,0.75)]">
+    <Card className="relative overflow-hidden border border-zinc-700/30 rounded-2xl bg-[linear-gradient(to_bottom,#2A2C2B_70%,#303231_100%)] shadow-[0_12px_32px_-14px_rgba(0,0,0,0.75)]">
       <CardContent className="relative p-6 pt-5 flex flex-col gap-1 text-white">
         <div className="absolute top-6 left-7 w-6 h-6 rounded-full bg-[#FFFCE6]/100 blur-[20px]" />
 
@@ -25,7 +25,9 @@ export function StatCard({ label, value, subtext, icon: Icon }: StatCardProps) {
         </h3>
 
         <p className="text-md text-zinc-300 font-medium">{label}</p>
-        <p className="text-[13px] text-zinc-500 mt-1 tracking-wider">{subtext}</p>
+        <p className="text-[13px] text-zinc-500 mt-1 tracking-wider">
+          {subtext}
+        </p>
       </CardContent>
     </Card>
   );
