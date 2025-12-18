@@ -17,7 +17,7 @@ import {
   Legend,
 } from "recharts";
 
-import { StatCard } from "@/components/stat-card";
+import { StatCard } from "@/components/ui/stat-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -28,6 +28,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { Database, Users, GraduationCap, Activity, Monitor } from "lucide-react";
 
 // --- DỮ LIỆU GIẢ LẬP (MOCK DATA) ---
 
@@ -70,24 +71,27 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
+const stats = [
+  { label: "Dataset", val: "MOOCCubeX", sub: "Online learning data", icon: Database },
+  { label: "Total Students", val: "3,243", sub: "active in system", icon: Users },
+  { label: "Avg Score", val: "8.4", sub: "+2.1% from last month", icon: GraduationCap },
+  { label: "Active Now", val: "573", sub: "students online", icon: Activity },
+];
+
 export default function OverviewPage() {
   return (
     <div className="space-y-6 pb-10 ">
       <h1 className="text-2xl font-semibold mb-4 text-zinc-400">Overview</h1>
 
       {/* Row 1: 4 Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[
-          { label: "Total Students", val: "3,243", sub: "active in system" },
-          { label: "Avg Score", val: "8.4", sub: "+2.1% from last month" },
-          { label: "Completion", val: "84%", sub: "courses completed" },
-          { label: "Active Now", val: "573", sub: "students online" },
-        ].map((item, i) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        {stats.map((item, i) => (
           <StatCard
             key={i}
             value={item.val}
             label={item.label}
             subtext={item.sub}
+            icon={item.icon}
           />
         ))}
       </div>
@@ -136,9 +140,7 @@ export default function OverviewPage() {
         {/* Donut Chart Area - Chiếm 1 phần */}
         <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 text-white shadow-xl shadow-black/30">
           <CardHeader>
-            <CardTitle className="text-sm font-medium">
-              Outcome distribution
-            </CardTitle>
+            <CardTitle className="text-sm font-medium">Outcome distribution</CardTitle>
           </CardHeader>
           <CardContent className=" relative bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 text-white shadow-xl shadow-black/30">
             <ResponsiveContainer width="100%" height="100%">
@@ -220,11 +222,7 @@ export default function OverviewPage() {
           <CardContent className="h-[200px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={barData}>
-                <CartesianGrid
-                  strokeDasharray="3 3"
-                  vertical={false}
-                  stroke="#27272a"
-                />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#27272a" />
                 <XAxis
                   dataKey="name"
                   stroke="#71717a"
@@ -232,16 +230,8 @@ export default function OverviewPage() {
                   tickLine={false}
                   axisLine={false}
                 />
-                <Tooltip
-                  cursor={{ fill: "#27272a" }}
-                  content={<CustomTooltip />}
-                />
-                <Bar
-                  dataKey="rate"
-                  fill="#fbbf24"
-                  radius={[4, 4, 0, 0]}
-                  barSize={20}
-                >
+                <Tooltip cursor={{ fill: "#27272a" }} content={<CustomTooltip />} />
+                <Bar dataKey="rate" fill="#fbbf24" radius={[4, 4, 0, 0]} barSize={20}>
                   {barData.map((entry, index) => (
                     <Cell
                       key={`cell-${index}`}
@@ -259,11 +249,7 @@ export default function OverviewPage() {
         <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 text-white shadow-xl shadow-black/30overflow-hidden">
           <CardHeader className="flex flex-row justify-between items-center pb-2">
             <CardTitle className="text-sm">Leaderboard</CardTitle>
-            <Button
-              variant="link"
-              size="sm"
-              className="text-xs text-zinc-400 h-auto p-0"
-            >
+            <Button variant="link" size="sm" className="text-xs text-zinc-400 h-auto p-0">
               Show more
             </Button>
           </CardHeader>

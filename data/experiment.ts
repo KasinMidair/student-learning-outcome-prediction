@@ -1,10 +1,4 @@
-export const METRICS = [
-  "Accuracy",
-  "BalancedAcc",
-  "F1-Score Macro",
-  "MCC",
-  "Kappa",
-];
+export const METRICS = ["Accuracy", "BalancedAcc", "F1-Score Macro", "MCC", "Kappa"];
 
 export const VERSIONS = [
   { id: "V0", label: "V0 (Raw Median)" },
@@ -15,8 +9,6 @@ export const VERSIONS = [
   { id: "V5", label: "V5 (Tree SASMOTE)" },
   { id: "V6", label: "V6 (Tree RADIUSSMOTE)" },
 ];
-
-
 
 export const EXPERIMENT_DATA: any = {
   V0: [
