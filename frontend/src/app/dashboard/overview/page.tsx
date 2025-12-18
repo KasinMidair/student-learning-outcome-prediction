@@ -192,7 +192,6 @@ export default function OverviewPage() {
                   active={true}
                   onClick={() => {}}
                   label="Top  10 courses"
-                  icon={<Activity size={16} />}
                 />
               </>
               <Button
@@ -242,7 +241,7 @@ export default function OverviewPage() {
                             index % 2 === 0 ? "transparent" : "#ffffff3b",
                         }}
                       >
-                        <TableCell className="py-2 text-sm  text-left text-zinc-300 pl-6 py-3">
+                        <TableCell className="text-sm  text-left text-zinc-300 pl-6 py-3">
                           {row.courseId}
                         </TableCell>
                         <TableCell className="py-2 text-sm  text-center text-zinc-400">

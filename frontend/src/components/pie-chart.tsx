@@ -25,12 +25,13 @@ interface OutcomePieChartProps {
 
 export function CustomPieChart({ data, tittle }: OutcomePieChartProps) {
   return (
-    <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#323734_100%)] border-0 shadow-xl shadow-black/30">
+    <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#323734_100%)] border-0 shadow-xl shadow-black/30 min-w-[300px]">
       <CardHeader>
         <CardTitle className="text-xl font-medium">{tittle}</CardTitle>
       </CardHeader>
-      <CardContent className=" h-[210px]  relative border-0 ">
-        <div className="h-full">
+
+      <CardContent className="h-[250px] relative border-0 p-2">
+        <div className="h-full w-full">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -38,8 +39,8 @@ export function CustomPieChart({ data, tittle }: OutcomePieChartProps) {
                 data={data}
                 cx="40%"
                 cy="50%"
-                innerRadius={70}
-                outerRadius={90}
+                innerRadius="60%"
+                outerRadius="80%"
                 paddingAngle={5}
                 dataKey="value"
                 stroke="none"
@@ -48,12 +49,20 @@ export function CustomPieChart({ data, tittle }: OutcomePieChartProps) {
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#1f1f1f",
+                  borderColor: "#333",
+                  borderRadius: "8px",
+                }}
+                itemStyle={{ color: "#fff" }}
+              />
               <Legend
                 content={<CustomLegend />}
                 layout="vertical"
                 align="right"
                 verticalAlign="middle"
+                wrapperStyle={{ right: 0, paddingLeft: "10px" }}
               />
             </PieChart>
           </ResponsiveContainer>

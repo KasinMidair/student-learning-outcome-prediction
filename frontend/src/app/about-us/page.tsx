@@ -10,6 +10,61 @@ import {
   Instagram,
   ArrowRight,
 } from "lucide-react";
+import { url } from "inspector";
+
+interface Member {
+  id: number;
+  name: string;
+  studentId: string;
+  classId: string;
+  color?: string; // Màu đặc biệt cho thành viên đầu tiên (để làm hiệu ứng picker)
+}
+
+// 2. Tạo Data bên ngoài (7 thành viên)
+const MEMBERS_DATA: Member[] = [
+  {
+    id: 1,
+    name: "Nguyễn Hồng Phát",
+    studentId: "22521072",
+    classId: "KHMT2202.3",
+  },
+  {
+    id: 2,
+    name: "Trần Văn B",
+    studentId: "22521073",
+    classId: "KHMT2202.3",
+  },
+  {
+    id: 3,
+    name: "Lê Thị C",
+    studentId: "22521074",
+    classId: "KHMT2202.3",
+  },
+  {
+    id: 4,
+    name: "Phạm Văn D",
+    studentId: "22521075",
+    classId: "KHMT2202.3",
+  },
+  {
+    id: 5,
+    name: "Hoàng Thị E",
+    studentId: "22521076",
+    classId: "KHMT2202.3",
+  },
+  {
+    id: 6,
+    name: "Vũ Văn F",
+    studentId: "22521077",
+    classId: "KHMT2202.3",
+  },
+  {
+    id: 7,
+    name: "Đặng Thị G",
+    studentId: "22521078",
+    classId: "KHMT2202.3",
+  },
+];
 
 export default function AboutUsPage() {
   return (
@@ -37,34 +92,32 @@ export default function AboutUsPage() {
             <Snowflake className="w-5 h-5" />
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 font-serif leading-tight">
+          <h1 className="torn-paper text-4xl md:text-6xl font-bold mb-6 font-serif leading-tight">
             Predicting Academic <br /> Success with AI
+            <svg width="0" height="0">
+              <filter id="torn">
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="0.8"
+                  numOctaves="2"
+                  result="noise"
+                />
+                <feDisplacementMap
+                  in="SourceGraphic"
+                  in2="noise"
+                  scale="3"
+                  xChannelSelector="R"
+                  yChannelSelector="G"
+                />
+              </filter>
+            </svg>
           </h1>
 
-          <p className="text-sm md:text-base max-w-2xl mx-auto opacity-90 mb-8 leading-relaxed">
+          <p className="text-sm md:text-base max-w-2xl text-semibold mx-auto text-[#2A2B2C] mb-8 leading-relaxed">
             Empowering educators and students with cutting-edge machine learning
             technologies to analyze and predict academic outcomes using real
             datasets.
           </p>
-
-          {/* Ribbon Bow Decoration (CSS mockup or SVG) */}
-          <div className="absolute right-0 bottom-0 opacity-20 pointer-events-none translate-x-1/4 translate-y-1/4">
-            {/* Bạn có thể thay bằng ảnh cái nơ thật */}
-            <svg
-              width="300"
-              height="300"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path
-                d="M12 2C12 2 16 6 16 12C16 18 12 22 12 22C12 22 8 18 8 12C8 6 12 2 12 2ZM12 2C12 2 4 4 4 10C4 16 12 22 12 22M12 2C12 2 20 4 20 10C20 16 12 22 12 22"
-                stroke="white"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
         </div>
       </section>
 
@@ -76,7 +129,7 @@ export default function AboutUsPage() {
               Our Mission
             </span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-serif text-[#CDAA7D]">
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#CDAA7D]">
             Predicting Academic <br /> Success with AI
           </h2>
           <p className="text-gray-400 text-sm leading-relaxed">
@@ -95,15 +148,14 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* --- SECTION 3: DATASET (CREAM) --- */}
+      {/* ---  DATASET --- */}
       <section className="bg-[#FAF8EF] py-16 px-6 text-center">
-        <h2 className="text-2xl font-bold text-[#6D8B74] uppercase tracking-widest mb-10">
+        <h2 className="text-3xl font-bold text-[#6D8B74] uppercase tracking-widest mb-10">
           Dataset Used
         </h2>
 
-        <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200">
-          {/* Mockup giao diện Dataset (thay bằng ảnh thật của bạn) */}
-          <div className="bg-[#1e293b] text-white p-3 flex items-center justify-between text-xs">
+        <div className="max-w-[70vw] mx-auto bg-white rounded-lg shadow-xl overflow-hidden ">
+          <div className="bg-black text-white p-3 flex items-center justify-between text-xs">
             <div className="flex gap-2">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
@@ -112,9 +164,14 @@ export default function AboutUsPage() {
             <span>MOOC/Dataset.csv</span>
           </div>
           <div className="p-0">
-            {/* Placeholder Image */}
-            <div className="w-full h-64 bg-gray-100 flex items-center justify-center text-gray-400">
-              <p>[ Insert Dataset Screenshot Here ]</p>
+            <div className=" relative w-full h-[65vh] con bg-gray-100 flex items-center justify-center text-gray-400">
+              <Image
+                fill
+                priority
+                src="https://res.cloudinary.com/dpqv7ag5w/image/upload/v1766056719/image_1775_1_wixlwr.png"
+                alt="dataset info image"
+                className="object-cover object-contain  origin-bottom "
+              />
             </div>
           </div>
         </div>
@@ -125,14 +182,14 @@ export default function AboutUsPage() {
         </p>
       </section>
 
-      {/* --- SECTION 4: CONTENT GRID (DARK) --- */}
+      {/* --- CONTENT GRID --- */}
       <section className="bg-[#0F1110] py-20 px-6 md:px-20 relative">
         <div className="absolute top-0 right-0 h-full w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
         <div className="absolute top-0 left-0 h-full w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* Card 1 */}
-          <div className="border border-white/10 bg-white/5 p-8 rounded hover:bg-white/10 transition duration-300">
+          <div className=" bg-[linear-gradient(to_bottom,#2A2C2B_70  %,#303231_100%)] shadow-xxl shadow-black/30 p-8 rounded-md hover:bg-white/10 transition duration-300">
             <h3 className="text-white font-serif text-xl mb-4">Courses</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -140,36 +197,40 @@ export default function AboutUsPage() {
               in varius risus augue a erat. Cras at enim mi.
             </p>
           </div>
-          {/* Card 2 */}
-          <div className="border border-white/10 bg-white/5 p-8 rounded hover:bg-white/10 transition duration-300">
-            <h3 className="text-white font-serif text-xl mb-4">Features</h3>
+
+          {/* Card 1 */}
+          <div className=" bg-[linear-gradient(to_bottom,#2A2C2B_70  %,#303231_100%)] shadow-xxl shadow-black/30 p-8 rounded-md hover:bg-white/10 transition duration-300">
+            <h3 className="text-white font-serif text-xl mb-4">Courses</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In
-              condimentum facilisis porta. Sed nec diam eu diam mattis viverra.
-              Nulla fringill.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              euismod, nisl vel tincidunt lacinia, ligula diam fringilla lectus,
+              in varius risus augue a erat. Cras at enim mi.
             </p>
           </div>
-          {/* Card 3 */}
-          <div className="border border-white/10 bg-white/5 p-8 rounded hover:bg-white/10 transition duration-300">
-            <h3 className="text-white font-serif text-xl mb-4">Analytics</h3>
+
+          {/* Card 1 */}
+          <div className=" bg-[linear-gradient(to_bottom,#2A2C2B_70  %,#303231_100%)] shadow-xxl shadow-black/30 p-8 rounded-md hover:bg-white/10 transition duration-300">
+            <h3 className="text-white font-serif text-xl mb-4">Courses</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Pellentesque habitant morbi tristique senectus et netus et
-              malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat
-              vitae.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              euismod, nisl vel tincidunt lacinia, ligula diam fringilla lectus,
+              in varius risus augue a erat. Cras at enim mi.
             </p>
           </div>
-          {/* Card 4 */}
-          <div className="border border-white/10 bg-white/5 p-8 rounded hover:bg-white/10 transition duration-300">
-            <h3 className="text-white font-serif text-xl mb-4">Predictions</h3>
+
+          {/* Card 1 */}
+          <div className=" bg-[linear-gradient(to_bottom,#2A2C2B_70  %,#303231_100%)] shadow-xxl shadow-black/30 p-8 rounded-md hover:bg-white/10 transition duration-300">
+            <h3 className="text-white font-serif text-xl mb-4">Courses</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Donec eu libero sit amet quam egestas semper. Aenean ultricies mi
-              vitae est. Mauris placerat eleifend leo.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              euismod, nisl vel tincidunt lacinia, ligula diam fringilla lectus,
+              in varius risus augue a erat. Cras at enim mi.
             </p>
           </div>
         </div>
       </section>
 
-      {/* --- SECTION 5: MEMBERS (RED) --- */}
+      {/* ---  MEMBERS --- */}
       <section className="py-16  px-6 md:px-12 relative overflow-hidden">
         {/* Decorations */}
         <Image
@@ -186,35 +247,44 @@ export default function AboutUsPage() {
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-2 mb-10">
             <Snowflake className="text-[#FFD700] w-6 h-6" />
-            <h2 className="text-3xl font-serif text-[#FFD700] font-bold">
-              Members
-            </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4, 5].map((member) => (
-              <div
-                key={member}
-                className="flex items-center gap-4 bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/20 hover:bg-white/20 transition"
-              >
-                <div className="w-12 h-12 rounded-full bg-gray-300 flex-shrink-0 overflow-hidden border-2 border-[#FFD700]">
-                  {/* Avatar Placeholder */}
-                  <Image
-                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${member}`}
-                    alt="avatar"
-                    width={48}
-                    height={48}
-                  />
+          <div className="flex">
+            <h2 className="text-3xl font-serif text-[#efc69] z-10 font-bold">
+              Members
+            </h2>
+            <div className="m-auto w-[60vw] grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+              {MEMBERS_DATA.map((member, index) => (
+                <div
+                  key={member.id}
+                  className="flex items-center gap-4 relative group"
+                >
+                  {/* Avatar */}
+                  <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0 overflow-hidden border-2 border-[#FFD700] shadow-lg">
+                    <Image
+                      src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${member.name}`}
+                      alt="avatar"
+                      width={64}
+                      height={64}
+                    />
+                  </div>
+
+                  {/* Info */}
+                  <div className="text-white">
+                    <p className="font-bold text-lg leading-tight">
+                      {member.name}
+                    </p>
+                    <p className="text-sm text-white/80 font-mono mt-0.5">
+                      {member.studentId}
+                    </p>
+
+                    <p className="text-xs text-[#FFD700] font-mono tracking-wide uppercase opacity-90">
+                      {member.classId}
+                    </p>
+                  </div>
                 </div>
-                <div className="text-white">
-                  <p className="font-bold text-sm">Nguyen Hong Phat</p>
-                  <p className="text-xs text-white/70">20521763</p>
-                  <p className="text-[10px] text-[#FFD700] uppercase">
-                    KHTN2020
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
           {/* Cây thông trang trí (vẽ bằng CSS hoặc SVG) */}
           <div className="absolute bottom-0 right-0 opacity-30">

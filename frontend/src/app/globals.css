@@ -121,3 +121,11 @@
     color: var(--foreground);
   }
 }
+
+@layer utilities {
+  .torn-paper {
+    filter: url(#torn);
+    text-shadow: 0.5px 0 0 rgba(0, 0, 0, 0.8), -0.5px 0 0 rgba(0, 0, 0, 0.8),
+      0 0.5px 0 rgba(0, 0, 0, 0), 0 -0.5px 0 rgba(0, 0, 0, 0);
+  }
+}
