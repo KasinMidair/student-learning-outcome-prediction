@@ -28,6 +28,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import CustomLegend from "@/components/custom-legend";
 
 // --- DỮ LIỆU GIẢ LẬP (MOCK DATA) ---
 
@@ -47,14 +48,19 @@ const pieData = [
 ];
 
 const barData = [
-  { name: "Mon", rate: 40 },
-  { name: "Tue", rate: 60 },
-  { name: "Wed", rate: 30 },
-  { name: "Thu", rate: 80 },
-  { name: "Fri", rate: 55 },
-  { name: "Sat", rate: 90 },
-  { name: "Sun", rate: 70 },
+  { name: "1/2020", rate: 40 },
+  { name: "3/2021", rate: 60 },
+  { name: "3/2021", rate: 30 },
+  { name: "3/2021", rate: 80 },
+  { name: "3/2021", rate: 55 },
+  { name: "3/2021", rate: 90 },
+  { name: "3/2021", rate: 70 },
 ];
+
+const chartData = barData.map((item) => ({
+  ...item,
+  remain: 100 - item.rate,
+}));
 
 // Custom Tooltip cho Dark Mode
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -73,8 +79,10 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export default function OverviewPage() {
   return (
-    <div className="space-y-6 pb-10 ">
-      <h1 className="text-2xl font-semibold mb-4 text-zinc-400">Overview</h1>
+    <div className=" space-y-6 ">
+      <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-md">
+        Overview
+      </h1>
 
       {/* Row 1: 4 Stats Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
@@ -96,16 +104,16 @@ export default function OverviewPage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1  md:grid-cols-[5fr_3fr]  gap-6 w-full">
+      <div className="  grid grid-cols-1  md:grid-cols-[5fr_3fr]  gap-6 w-full">
         <div className="grid grid-cols-1 lg:grid-row-2  gap-y-6">
           {/* Line Chart Area - Chiếm 2 phần */}
           <Card className="col-span-1 lg:col-span-2 bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 text-white shadow-xl shadow-black/30 ">
             <CardHeader>
               <CardTitle className="text-xl font-medium">
-                Learning outcome distribution
+                Monthly Student Enrollment in Courses
               </CardTitle>
             </CardHeader>
-            <CardContent className="h-[50vh] w-full pl-0 pr-10 ">
+            <CardContent className="h-[80%] w-full pl-0 pr-10 ">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={lineData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#636864ff" />
@@ -137,34 +145,35 @@ export default function OverviewPage() {
             </CardContent>
           </Card>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Pass Rate Gauge (Giả lập bằng số cho đơn giản) */}
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_4fr] gap-6">
+            {/* Pass Rate Gauge */}
             <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 text-white shadow-xl shadow-black/30">
               <CardHeader>
-                <CardTitle className="text-sm">Pass Rate Summary</CardTitle>
+                <CardTitle className="text-xl text-center">
+                  Pass Rate Summary
+                </CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col items-center justify-center space-y-4">
-                <div className="relative w-32 h-32 flex items-center justify-center">
-                  {/* Vòng tròn trang trí */}
+                <div className="relative w-46 h-36 flex items-center justify-center">
                   <svg className="w-full h-full transform -rotate-90">
                     <circle
-                      cx="64"
-                      cy="64"
+                      cx="50%"
+                      cy="50%"
                       r="60"
                       stroke="currentColor"
-                      strokeWidth="8"
+                      strokeWidth="12"
                       fill="transparent"
                       className="text-zinc-800"
                     />
                     <circle
-                      cx="64"
-                      cy="64"
+                      cx="50%"
+                      cy="50%"
                       r="60"
                       stroke="currentColor"
-                      strokeWidth="8"
+                      strokeWidth="14"
                       fill="transparent"
                       strokeDasharray={377}
-                      strokeDashoffset={377 - (377 * 25) / 100} // 25%
+                      strokeDashoffset={377 - (377 * 25) / 100}
                       className="text-green-500 transition-all duration-1000 ease-out"
                     />
                   </svg>
@@ -178,14 +187,28 @@ export default function OverviewPage() {
               </CardContent>
             </Card>
 
-            {/* Pass Rate Bar Chart */}
+            {/* monthly top 5 pass rate */}
             <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 text-white shadow-xl shadow-black/30">
               <CardHeader>
-                <CardTitle className="text-sm">Weekly Activity</CardTitle>
+                <CardTitle className="text-xl">
+                  Top 7 Monthly Pass Rate of Users
+                </CardTitle>
               </CardHeader>
-              <CardContent className="h-[200px] w-full">
+              <CardContent className="h-[250px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={barData}>
+                  <BarChart data={chartData}>
+                    <defs>
+                      <linearGradient
+                        id="colorGradient"
+                        x1="50%"
+                        y1="0"
+                        x2="50%"
+                        y2="1"
+                      >
+                        <stop offset="o%" stopColor="#58D764" />
+                        <stop offset="100%" stopColor="#FBE947" />
+                      </linearGradient>
+                    </defs>
                     <CartesianGrid
                       strokeDasharray="3 3"
                       vertical={false}
@@ -198,21 +221,31 @@ export default function OverviewPage() {
                       tickLine={false}
                       axisLine={false}
                     />
+
                     <Tooltip
                       cursor={{ fill: "#27272a" }}
                       content={<CustomTooltip />}
                     />
                     <Bar
                       dataKey="rate"
+                      stackId="total"
                       fill="#fbbf24"
-                      radius={[4, 4, 0, 0]}
-                      barSize={20}
+                      barSize={30}
                     >
-                      {barData.map((entry, index) => (
+                      {chartData.map((entry, index) => (
                         <Cell
                           key={`cell-${index}`}
-                          fill="url(#colorGradient)" // Nếu muốn gradient thì cần định nghĩa defs, ở đây dùng màu trơn
+                          fill="url(#colorGradient)"
                           fillOpacity={0.8}
+                        />
+                      ))}
+                    </Bar>
+                    <Bar dataKey="remain" stackId="total" barSize={30}>
+                      {chartData.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill="#ffffff"
+                          fillOpacity={0.1}
                         />
                       ))}
                     </Bar>
@@ -223,25 +256,25 @@ export default function OverviewPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-row-2 gap-6">
-          {/* Donut Chart Area - Chiếm 1 phần */}
+        <div className="grid grid-cols-1 grid-rows-[2fr_3fr] gap-6">
+          {/* label distribution */}
           <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 text-white shadow-xl shadow-black/30">
             <CardHeader>
               <CardTitle className="text-xl font-medium">
-                Outcome distribution
+                Learning outcome distribution
               </CardTitle>
             </CardHeader>
-            <CardContent className=" h-[250px] relative border-0 text-white">
+            <CardContent className=" h-[210px]  relative border-0 text-white">
               <div className="h-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
                       data={pieData}
-                      cx="50%"
+                      cx="40%"
                       cy="50%"
-                      innerRadius={65}
-                      outerRadius={85}
-                      paddingAngle={4}
+                      innerRadius={70}
+                      outerRadius={90}
+                      paddingAngle={5}
                       dataKey="value"
                       stroke="none"
                     >
@@ -251,9 +284,10 @@ export default function OverviewPage() {
                     </Pie>
                     <Tooltip />
                     <Legend
-                      verticalAlign="bottom"
-                      height={36}
-                      iconType="circle"
+                      content={<CustomLegend />}
+                      layout="vertical"
+                      align="right"
+                      verticalAlign="middle"
                     />
                   </PieChart>
                 </ResponsiveContainer>

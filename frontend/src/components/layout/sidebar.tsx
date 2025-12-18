@@ -23,7 +23,7 @@ const bottomItems = [
 
 export function Sidebar() {
   return (
-    <div className="w-64 h-screen bg-[#262626] border-0 flex flex-col py-6 text-zinc-400 shadow-xxl shadow-black/30 ">
+    <div className="w-64 h-screen bg-[#262626] border-0 flex flex-col py-6 text-zinc-400 shadow-xxl shadow-black/30  ">
       {/* Logo Area */}
       <div className="mb-10 text-white text-xl font-bold px-6">
         LMS Dashboard
