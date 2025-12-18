@@ -16,10 +16,10 @@ export default function ExperimentPage() {
   const currentData = EXPERIMENT_DATA[selectedVersion] || EXPERIMENT_DATA["V0"];
 
   return (
-    <div className="min-h-screen font-sans p-6 md:p-10 relative text-white">
+    <div className="text-white font-sans relative overflow-hidden">
       <Shape />
 
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
+      <div className="w-full mx-auto mb-8 relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
           <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-md">
             Experiment Results
@@ -41,7 +41,7 @@ export default function ExperimentPage() {
         </div>
       </div>
 
-      <div className="w-full max-w-[1400px] mx-auto">
+      <div className="w-full mx-auto">
         <div className="flex items-end w-full pl-0 relative z-10">
           <Tab
             variant="start"

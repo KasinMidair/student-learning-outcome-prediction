@@ -5,11 +5,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   const handleNavigate = () => {
@@ -44,7 +41,14 @@ export default function DashboardLayout({
           </Avatar>
         </header>
 
-        <div className=" relative z-10 p-16  pb-4 pt-0 overflow-y-auto flex-1">
+        <div
+          className="relative z-10 p-16 pb-4 pt-0 overflow-y-auto flex-1 
+            [&::-webkit-scrollbar]:w-2
+            [&::-webkit-scrollbar-track]:bg-transparent
+            [&::-webkit-scrollbar-thumb]:bg-zinc-800
+            [&::-webkit-scrollbar-thumb]:rounded-full
+            hover:[&::-webkit-scrollbar-thumb]:bg-zinc-700"
+        >
           {children}
         </div>
       </main>

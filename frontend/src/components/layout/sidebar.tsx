@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 
 const menuItems = [
   { name: "Overview", icon: LayoutDashboard, href: "/dashboard/overview" },
@@ -45,7 +44,7 @@ export function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="flex items-center px-6 gap-3 px-3 py-2 rounded-0 hover:bg-zinc-900 hover:text-primary hover:bg-[#FFFCE6]/10 hover:text-black"
+                className="flex items-center px-6 gap-3 py-2 rounded-0 hover:bg-zinc-900 hover:text-primary hover:bg-[#FFFCE6]/10 hover:text-black"
                 style={{
                   background: pathname == item.href ? "#3c3b39" : "transparent",
                   font: pathname == item.href ? "bold" : "normal",
@@ -68,7 +67,7 @@ export function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="flex items-center gap-3 px-6 px-3 py-2 rounded-lg hover:bg-zinc-900 hover:text-white transition-colors"
+                className="flex items-center gap-3 px-6 py-2 rounded-lg hover:bg-zinc-900 hover:text-white transition-colors"
               >
                 <item.icon size={20} className="text-[#A3B79C]" />
                 <span>{item.name}</span>
