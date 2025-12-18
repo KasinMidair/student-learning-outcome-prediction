@@ -108,7 +108,7 @@ export default function CoursesPage() {
                   currentCourses.map((course, index) => (
                     <TableRow
                       key={course.id}
-                      className="border-zinc-800 hover:bg-zinc-800/50 cursor-pointer transition-colors"
+                      className="border-zinc-800 hover:bg-zinc-800/50 transition-colors"
                       style={{
                         backgroundColor: index % 2 !== 0 ? "transparent" : "#3f403d",
                       }}

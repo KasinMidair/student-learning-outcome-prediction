@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Database, Hash, LayoutGrid } from "lucide-react";
+import { Database, Rows3, Columns3 } from "lucide-react";
 
 import { StatCard } from "@/components/ui/stat-card";
 import { Tab } from "@/components/ui/tab";
@@ -15,7 +15,7 @@ import { DQ_DATA } from "../../../../../data/quality";
 
 export default function DataQualityPage() {
   const [activeTab] = useState<"overview">("overview");
-  const statIcons = [Database, Hash, LayoutGrid];
+  const statIcons = [Database, Rows3, Columns3];
 
   return (
     <div className="min-h-screen p-6 md:p-10 relative text-white">

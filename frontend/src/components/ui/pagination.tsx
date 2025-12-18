@@ -52,11 +52,11 @@ export const Pagination: React.FC<PaginationProps> = ({
   return (
     <div
       className={cn(
-        "flex items-center justify-center py-6 select-none font-sans",
+        "flex items-center justify-center py-4 select-none font-sans",
         className
       )}
     >
-      <div className="flex items-center gap-2 px-4 py-2 bg-black/40 border border-white/5 rounded-full shadow-2xl transition-all duration-300 hover:bg-black/60 hover:border-[#FFFCE6]/30 hover:shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+      <div className="flex items-center gap-2 px-4 py-2 bg-black/40 backdrop-blur-md border border-white/5 rounded-full shadow-lg transition-all duration-300 hover:bg-black/60 hover:border-[#FFFCE6]/30 hover:shadow-[0_0_15px_rgba(0,0,0,0.2)]">
         {/* prev */}
         <button
           onClick={() => onPageChange(currentPage - 1)}
@@ -85,7 +85,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                 className={cn(
                   "w-9 h-9 flex items-center justify-center rounded-full text-sm font-medium transition-all duration-300",
                   isActive
-                    ? "bg-[#FFFCE6] text-black shadow-[0_0_15px_rgba(255,252,230,0.5)] scale-110 font-bold"
+                    ? "bg-[#FFFCE6] text-black shadow-[0_0_10px_rgba(255,252,230,0.4)] scale-110 font-bold" // Giảm bóng glow của nút active
                     : "text-zinc-400 hover:text-[#FFFCE6] hover:bg-[#FFFCE6]/10"
                 )}
               >
