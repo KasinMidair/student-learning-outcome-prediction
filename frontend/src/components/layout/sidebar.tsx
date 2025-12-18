@@ -8,6 +8,9 @@ import {
   HelpCircle,
 } from "lucide-react";
 
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+
 const menuItems = [
   { name: "Overview", icon: LayoutDashboard, href: "/dashboard/overview" },
   { name: "Data Quality", icon: Database, href: "/dashboard/data-quality" },
@@ -22,6 +25,8 @@ const bottomItems = [
 ];
 
 export function Sidebar() {
+  const pathname = usePathname();
+
   return (
     <div className="w-64 h-screen bg-[#262626] border-0 flex flex-col py-6 text-zinc-400 shadow-xxl shadow-black/30  ">
       {/* Logo Area */}
@@ -41,6 +46,10 @@ export function Sidebar() {
                 key={item.href}
                 href={item.href}
                 className="flex items-center px-6 gap-3 px-3 py-2 rounded-0 hover:bg-zinc-900 hover:text-primary hover:bg-[#FFFCE6]/10 hover:text-black"
+                style={{
+                  background: pathname == item.href ? "#3c3b39" : "transparent",
+                  font: pathname == item.href ? "bold" : "normal",
+                }}
               >
                 <item.icon size={20} className="text-[#A3B79C]" />
                 <span>{item.name}</span>

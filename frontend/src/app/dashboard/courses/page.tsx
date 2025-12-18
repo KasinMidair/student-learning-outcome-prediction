@@ -1,8 +1,15 @@
 "use client";
 
-import React from "react";
-import { Search, ChevronRight } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import React, { useState } from "react";
+import {
+  Search,
+  ChevronRight,
+  ChevronLeft,
+  Activity,
+  Eye,
+  MoreHorizontal,
+} from "lucide-react";
+import { Input } from "@/components/ui/input"; // Đảm bảo đã import Input
 import {
   Table,
   TableBody,
@@ -12,89 +19,234 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
+import { Shape } from "@/components/ui/shape";
+import { Tab } from "@/components/ui/tab";
+import { Button } from "@/components/ui/button";
 
 export default function CoursesPage() {
   const router = useRouter();
 
-  // Mock data
-  const courses = Array.from({ length: 10 }).map((_, i) => ({
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const itemsPerPage = 10;
+
+  const courses = Array.from({ length: 500 }).map((_, i) => ({
     id: `U_32132${i}`,
-    about: "Nguyen Van A",
-    school: "40",
+    name: `Nguyen Van A ${i + 1}`,
+    school: "Information Technology",
+    totalRegistration: `${Math.floor(Math.random() * 100)}`,
   }));
 
+  const filteredCourses = courses.filter((course) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      course.name.toLowerCase().includes(query) ||
+      course.id.toLowerCase().includes(query) ||
+      course.school.toLowerCase().includes(query)
+    );
+  });
+
+  const totalPages = Math.ceil(filteredCourses.length / itemsPerPage);
+
+  const safeTotalPages = totalPages > 0 ? totalPages : 1;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentCourses = filteredCourses.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= safeTotalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1);
+  };
+
+  const getPageNumbers = () => {
+    const pages = [];
+    if (safeTotalPages <= 7) {
+      for (let i = 1; i <= safeTotalPages; i++) pages.push(i);
+    } else {
+      if (currentPage <= 4) {
+        pages.push(1, 2, 3, 4, 5, "...", safeTotalPages);
+      } else if (currentPage >= safeTotalPages - 3) {
+        pages.push(
+          1,
+          "...",
+          safeTotalPages - 4,
+          safeTotalPages - 3,
+          safeTotalPages - 2,
+          safeTotalPages - 1,
+          safeTotalPages
+        );
+      } else {
+        pages.push(
+          1,
+          "...",
+          currentPage - 1,
+          currentPage,
+          currentPage + 1,
+          "...",
+          safeTotalPages
+        );
+      }
+    }
+    return pages;
+  };
+
   return (
-    <div className="p-8 min-h-screen bg-black text-white font-sans relative overflow-hidden">
-      {/* Background Snowflake Decoration (Optional) */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-10 bg-[url('/snowflake-bg.svg')] bg-no-repeat bg-center"></div>
+    <div className="  text-white font-sans relative overflow-hidden">
+      <Shape />
+      <div className="w-full mx-auto">
+        <div className="flex items-center w-full pl-0 justify-between relative z-10">
+          <div>
+            <Tab
+              variant="start"
+              active={true}
+              onClick={() => {}}
+              label="courses"
+              icon={<Activity size={16} />}
+            />
+          </div>
 
-      <div className="flex justify-between items-center mb-8 relative z-10">
-        <h1 className="text-2xl font-bold text-zinc-100">Courses</h1>
-        <div className="relative w-64">
-          <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-500" />
-          <Input
-            placeholder="Search"
-            className="pl-9 bg-zinc-900 border-zinc-700 text-zinc-300 focus:ring-orange-500 rounded-full"
-          />
+          <div className="relative w-64 md:w-80  ">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
+            <Input
+              placeholder="Search by ID, Name..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="pl-9 rounded-md bg-zinc-800/50  rounded-2xl focus-visible:ring-zinc-600 border-zinc-300 text-white placeholder:text-zinc-500  h-9"
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="bg-[#18181b]/80 backdrop-blur-md border border-zinc-800 rounded-xl overflow-hidden relative z-10">
-        {/* Tab-like header */}
-        <div className="px-6 py-4 border-b border-zinc-800 bg-zinc-900/50">
-          <span className="font-semibold text-zinc-200">Courses List</span>
+        <div className="bg-[linear-gradient(to_bottom,#2A2C2B_70%,#303231_100%)] border-0 text-white shadow-xxl shadow-black/30 rounded-b-xl rounded-tr-xl rounded-tl-none pt-4 md:pt-6 relative z-0">
+          <div className="animate-in fade-in zoom-in-95 duration-300 h-full pt-3">
+            <Table>
+              <TableHeader>
+                <TableRow className="border-zinc-800 hover:bg-transparent">
+                  <TableHead className="text-center h-8 text-base font-semibold">
+                    Course Id
+                  </TableHead>
+                  <TableHead className="h-8 text-center text-base font-semibold">
+                    Course Name
+                  </TableHead>
+                  <TableHead className="h-8 text-center text-base font-semibold">
+                    School
+                  </TableHead>
+                  <TableHead className="h-8 text-center text-base font-semibold">
+                    Registration
+                  </TableHead>
+                  <TableHead className="h-8 text-base text-center font-semibold pr-4">
+                    Detail
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody className="pt-10">
+                {currentCourses.length > 0 ? (
+                  currentCourses.map((course, index) => (
+                    <TableRow
+                      key={course.id}
+                      className="border-zinc-800 hover:bg-zinc-800/50 cursor-pointer transition-colors"
+                      style={{
+                        backgroundColor:
+                          index % 2 !== 0 ? "transparent" : "#3f403d",
+                      }}
+                    >
+                      <TableCell className="font-sm text-center ">
+                        {course.id}
+                      </TableCell>
+                      <TableCell className="text-center font-sm ">
+                        {course.name}
+                      </TableCell>
+                      <TableCell className="text-center font-sm ">
+                        {course.school}
+                      </TableCell>
+                      <TableCell className="text-center font-sm ">
+                        {course.totalRegistration}
+                      </TableCell>
+                      <TableCell className="text-center py-2">
+                        <Button
+                          className="inline-flex items-center justify-center"
+                          onClick={() =>
+                            router.push(`/dashboard/courses/${course.id}`)
+                          }
+                        >
+                          <Eye />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={5}
+                      className="h-24 text-center text-zinc-500"
+                    >
+                      No results found for &quot;{searchQuery}&quot;
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
         </div>
 
-        <Table>
-          <TableHeader>
-            <TableRow className="border-zinc-800 hover:bg-transparent">
-              <TableHead className="text-zinc-400 font-medium">
-                Course Id
-              </TableHead>
-              <TableHead className="text-zinc-400 font-medium">About</TableHead>
-              <TableHead className="text-zinc-400 font-medium">
-                School
-              </TableHead>
-              <TableHead className="text-zinc-400 font-medium">...</TableHead>
-              <TableHead className="text-zinc-400 font-medium text-right">
-                Action
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {courses.map((course, index) => (
-              <TableRow
-                key={index}
-                className="border-zinc-800 hover:bg-zinc-800/50 cursor-pointer transition-colors"
-                onClick={() => router.push(`/dashboard/courses/${course.id}`)} // Chuyển trang khi click
-              >
-                <TableCell className="text-zinc-300 font-medium py-4">
-                  {course.id}
-                </TableCell>
-                <TableCell className="text-zinc-400 py-4">
-                  {course.about}
-                </TableCell>
-                <TableCell className="text-zinc-400 py-4">
-                  {course.school}
-                </TableCell>
-                <TableCell className="text-zinc-500 py-4">---</TableCell>
-                <TableCell className="text-right py-4 text-zinc-500">
-                  ---
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        {/* --- PAGINATION  --- */}
+        {filteredCourses.length > 0 && (
+          <div className="flex items-center justify-center p-4 gap-1 text-sm mt-4 select-none">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="text-zinc-400 hover:text-white disabled:opacity-30"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </Button>
 
-        {/* Pagination Mockup */}
-        <div className="flex justify-center p-4 text-zinc-500 text-xs gap-4">
-          <span>1</span>
-          <span className="text-white font-bold">2</span>
-          <span>3</span>
-          <span>...</span>
-          <span>50</span>
-          <ChevronRight className="w-4 h-4" />
-        </div>
+            {getPageNumbers().map((page, index) => {
+              if (page === "...") {
+                return (
+                  <span
+                    key={`ellipsis-${index}`}
+                    className="px-2 text-zinc-500"
+                  >
+                    <MoreHorizontal className="w-4 h-4" />
+                  </span>
+                );
+              }
+              return (
+                <Button
+                  key={page}
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => handlePageChange(page as number)}
+                  className={`w-8 h-8 p-0 ${
+                    currentPage === page
+                      ? "text-white font-bold bg-zinc-700/80 hover:bg-zinc-700"
+                      : "text-zinc-500 hover:text-white hover:bg-zinc-800/50"
+                  }`}
+                >
+                  {page}
+                </Button>
+              );
+            })}
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === safeTotalPages}
+              className="text-zinc-400 hover:text-white disabled:opacity-30"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

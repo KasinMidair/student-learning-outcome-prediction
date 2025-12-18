@@ -7,7 +7,7 @@ interface StatCardProps {
   subtext: string;
 }
 
-export function StatCard({ label, value, subtext }: StatCardProps) {
+export function StatCard({ label, value, subtext, icon }: StatCardProps) {
   return (
     <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_70%,#303231_100%)] border-0 text-white shadow-xxl shadow-black/30 w-full">
       <CardContent className="p-6 py-4 flex flex-col gap-1  ">

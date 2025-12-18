@@ -33,8 +33,7 @@ export const Phase = ({ version = "V0" }: PhaseProps) => {
 
   useEffect(() => setMounted(true), []);
 
-  const currentData =
-    PHASE_DATA[version]?.[activeMetric] || PHASE_DATA["V0"]["Accuracy"];
+  const currentData = PHASE_DATA[version]?.[activeMetric] || PHASE_DATA["V0"]["Accuracy"];
 
   if (!mounted) return <div className="h-full w-full bg-[#292B2A]" />;
 
@@ -132,17 +131,12 @@ export const Phase = ({ version = "V0" }: PhaseProps) => {
 
           <div className="flex flex-wrap justify-center gap-6 mt-2 pt-4 border-t border-zinc-800/50">
             {Object.entries(MODELS_CONFIG).map(([name, color]) => (
-              <div
-                key={name}
-                className="flex items-center gap-1.5 cursor-default"
-              >
+              <div key={name} className="flex items-center gap-1.5 cursor-default">
                 <span
                   className="w-2.5 h-2.5 rounded-full shadow-[0_0_8px_rgba(0,0,0,0.5)]"
                   style={{ backgroundColor: color }}
                 />
-                <span className="text-zinc-300 font-medium text-xs">
-                  {name}
-                </span>
+                <span className="text-zinc-300 font-medium text-xs">{name}</span>
               </div>
             ))}
           </div>

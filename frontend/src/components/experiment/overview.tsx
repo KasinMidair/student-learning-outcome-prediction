@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { BarChart3 } from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -51,11 +50,7 @@ export const Overview = ({ data }: { data: any[] }) => {
             margin={{ top: 0, right: 30, left: 40, bottom: 0 }}
             barGap={4}
           >
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="#27272a"
-              horizontal={false}
-            />
+            <CartesianGrid strokeDasharray="3 3" stroke="#27272a" horizontal={false} />
             <XAxis
               type="number"
               stroke="#52525b"

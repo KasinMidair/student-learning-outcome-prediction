@@ -56,6 +56,11 @@ module.exports = {
           5: "hsl(var(--chart-5))",
         },
       },
+      text: {
+        primary: "var(--text-primary)",
+        secondary: "var(--text-secondary)",
+        muted: "var(--text-muted)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

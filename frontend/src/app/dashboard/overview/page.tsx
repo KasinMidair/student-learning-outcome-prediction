@@ -1,4 +1,4 @@
-"use client"; // 👈 QUAN TRỌNG: Bắt buộc phải có để chạy Recharts
+"use client";
 
 import React from "react";
 import {
@@ -17,7 +17,7 @@ import {
   Legend,
 } from "recharts";
 
-import { StatCard } from "@/components/stat-card";
+import { StatCard } from "@/components/ui/stat-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -29,6 +29,16 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import CustomLegend from "@/components/custom-legend";
+import {
+  Activity,
+  ChevronRight,
+  Database,
+  GraduationCap,
+  Users,
+} from "lucide-react";
+import { Tab } from "@/components/ui/tab";
+import { Shape } from "@/components/ui/shape";
+import Link from "next/link";
 
 // --- DỮ LIỆU GIẢ LẬP (MOCK DATA) ---
 
@@ -62,11 +72,20 @@ const chartData = barData.map((item) => ({
   remain: 100 - item.rate,
 }));
 
-// Custom Tooltip cho Dark Mode
+const courseData = [
+  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
+  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
+  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
+  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
+  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
+  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
+  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
+];
+
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-zinc-800 border border-zinc-700 p-2 rounded shadow-md text-xs text-white">
+      <div className="bg-zinc-800 border border-zinc-700 p-2 rounded shadow-md text-xs ">
         <p className="font-semibold mb-1">{label}</p>
         <p style={{ color: payload[0].color }}>
           {payload[0].name}: {payload[0].value}
@@ -77,37 +96,51 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
+const stats = [
+  {
+    label: "Dataset",
+    val: "MOOCCubeX",
+    sub: "Online learning data",
+    icon: Database,
+  },
+  {
+    label: "Total Students",
+    val: "3,243",
+    sub: "active in system",
+    icon: Users,
+  },
+  {
+    label: "Avg Score",
+    val: "8.4",
+    sub: "+2.1% from last month",
+    icon: GraduationCap,
+  },
+];
+
 export default function OverviewPage() {
   return (
     <div className=" space-y-6 ">
-      <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-md">
+      <h1 className="text-3xl font-bold  mb-2 tracking-tight drop-shadow-md">
         Overview
       </h1>
 
       {/* Row 1: 4 Stats Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
-        {[
-          { label: "Total Students", val: "3,243", sub: "active in system" },
-          {
-            label: "Total Courses",
-            val: "10,000",
-            sub: "+2.1% from last month",
-          },
-          { label: "Completion Rate", val: "84%", sub: "courses completed" },
-        ].map((item, i) => (
+        {stats.map((item, i) => (
           <StatCard
             key={i}
             value={item.val}
             label={item.label}
             subtext={item.sub}
+            icon={item.icon}
           />
         ))}
       </div>
 
       <div className="  grid grid-cols-1  md:grid-cols-[5fr_3fr]  gap-6 w-full">
-        <div className="grid grid-cols-1 lg:grid-row-2  gap-y-6">
+        <div className="grid grid-cols-1 lg:grid-row-2 gap-y-6">
           {/* Line Chart Area - Chiếm 2 phần */}
-          <Card className="col-span-1 lg:col-span-2 bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 text-white shadow-xl shadow-black/30 ">
+          <Card className="col-span-1 lg:col-span-2 bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 shadow-xl shadow-black/30 ">
             <CardHeader>
               <CardTitle className="text-xl font-medium">
                 Monthly Student Enrollment in Courses
@@ -147,7 +180,7 @@ export default function OverviewPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_4fr] gap-6">
             {/* Pass Rate Gauge */}
-            <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 text-white shadow-xl shadow-black/30">
+            <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 shadow-xl shadow-black/30">
               <CardHeader>
                 <CardTitle className="text-xl text-center">
                   Pass Rate Summary
@@ -178,17 +211,17 @@ export default function OverviewPage() {
                     />
                   </svg>
                   <div className="absolute text-center">
-                    <span className="text-3xl font-bold text-white">25%</span>
+                    <span className="text-3xl font-bold ">25%</span>
                   </div>
                 </div>
-                <p className="text-xs text-zinc-500">
+                <p className="text-sm text-zinc-400">
                   Total pass rate this month
                 </p>
               </CardContent>
             </Card>
 
-            {/* monthly top 5 pass rate */}
-            <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 text-white shadow-xl shadow-black/30">
+            {/* monthly top 7 pass rate */}
+            <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 shadow-xl shadow-black/30">
               <CardHeader>
                 <CardTitle className="text-xl">
                   Top 7 Monthly Pass Rate of Users
@@ -258,13 +291,13 @@ export default function OverviewPage() {
 
         <div className="grid grid-cols-1 grid-rows-[2fr_3fr] gap-6">
           {/* label distribution */}
-          <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 text-white shadow-xl shadow-black/30">
+          <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 shadow-xl shadow-black/30">
             <CardHeader>
               <CardTitle className="text-xl font-medium">
                 Learning outcome distribution
               </CardTitle>
             </CardHeader>
-            <CardContent className=" h-[210px]  relative border-0 text-white">
+            <CardContent className=" h-[210px]  relative border-0 ">
               <div className="h-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
@@ -295,53 +328,81 @@ export default function OverviewPage() {
             </CardContent>
           </Card>
           {/* Leaderboard Table */}
-          <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#303231_100%)] border-0 text-white shadow-xl shadow-black/30overflow-hidden">
-            <CardHeader className="flex flex-row justify-between items-center pb-2">
-              <CardTitle className="text-sm">Leaderboard</CardTitle>
+          <Shape />
+          <div className="w-full  mx-auto">
+            <div className="flex items-center w-full pl-0 justify-between relative z-10">
+              <>
+                <Tab
+                  variant="start"
+                  active={true}
+                  onClick={() => {}}
+                  label="Top  10 courses"
+                  icon={<Activity size={16} />}
+                />
+              </>
               <Button
+                asChild
                 variant="link"
                 size="sm"
-                className="text-xs text-zinc-400 h-auto p-0"
+                className="text-sm text-zinc-400 p-0"
               >
-                Show more
+                <Link href="/dashboard/courses">
+                  Show more
+                  <ChevronRight className="ml-1 text-[var(--text-secondary)]" />
+                </Link>
               </Button>
-            </CardHeader>
-            <CardContent className="p-0">
-              <Table>
-                <TableHeader>
-                  <TableRow className="border-zinc-800 hover:bg-transparent">
-                    <TableHead className="text-zinc-500 h-8 text-xs font-medium">
-                      User Name
-                    </TableHead>
-                    <TableHead className="text-zinc-500 h-8 text-xs text-right font-medium">
-                      Courses
-                    </TableHead>
-                    <TableHead className="text-zinc-500 h-8 text-xs text-right font-medium">
-                      Grade
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {[1, 2, 3, 4, 5].map((row) => (
-                    <TableRow
-                      key={row}
-                      className="border-zinc-800 hover:bg-zinc-800/50 transition-colors"
-                    >
-                      <TableCell className="py-2 text-xs text-zinc-300">
-                        Nguyen Van A
-                      </TableCell>
-                      <TableCell className="py-2 text-xs text-right text-zinc-400">
-                        40
-                      </TableCell>
-                      <TableCell className="py-2 text-xs text-right font-bold text-green-400">
-                        A
-                      </TableCell>
+            </div>
+
+            <div
+              className={`
+            bg-[linear-gradient(to_bottom,#2A2C2B_70%,#303231_100%)] border-0 text-white shadow-xxl shadow-black/30
+            rounded-b-xl rounded-tr-xl rounded-tl-none 
+            pt-4 md:pt-6
+            relative z-0
+
+          `}
+            >
+              <div className="animate-in fade-in zoom-in-95 duration-300 h-full pt-3">
+                <Table>
+                  <TableHeader>
+                    <TableRow className=" border-zinc-800 hover:bg-transparent">
+                      <TableHead className="pl-6  h-8 text-sm font-semibold ">
+                        Course Id
+                      </TableHead>
+                      <TableHead className=" h-8  text-center text-sm  font-semibold">
+                        Total Registration
+                      </TableHead>
+                      <TableHead className="  h-8 text-sm text-right font-semibold pr-4">
+                        Pass Rate
+                      </TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+                  </TableHeader>
+                  <TableBody>
+                    {courseData.map((row, index) => (
+                      <TableRow
+                        key={row.courseId}
+                        className="border-zinc-800 w-full hover:bg-zinc-800/50 transition-colors  "
+                        style={{
+                          backgroundColor:
+                            index % 2 === 0 ? "transparent" : "#ffffff3b",
+                        }}
+                      >
+                        <TableCell className="py-2 text-sm  text-left text-zinc-300 pl-6 py-3">
+                          {row.courseId}
+                        </TableCell>
+                        <TableCell className="py-2 text-sm  text-center text-zinc-400">
+                          {row.totalRegistration}
+                        </TableCell>
+                        <TableCell className="py-2 text-sm text-right font-bold text-green-400 pr-6">
+                          {row.passRate}%
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
