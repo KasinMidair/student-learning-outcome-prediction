@@ -1,73 +1,74 @@
-import { Database, Table as TableIcon, Columns } from "lucide-react";
-import { StatCard } from "@/components/stat-card"; // Component từ bài trước
+"use client";
+
+import { useState } from "react";
+import { Database, Hash, LayoutGrid } from "lucide-react";
+
+import { StatCard } from "@/components/ui/stat-card";
+import { Tab } from "@/components/ui/tab";
+import { Shape } from "@/components/ui/shape";
 import { TheorySection } from "@/components/data-quality/theory-section";
+import { AccDQSection } from "@/components/data-quality/acc-dq-section";
 import { QualityBarChart } from "@/components/data-quality/charts/quality-bar-chart";
 import { QualityDonutChart } from "@/components/data-quality/charts/quality-donut-chart";
 
+import { DQ_DATA } from "../../../../../data/quality";
+
 export default function DataQualityPage() {
+  const [activeTab] = useState<"overview">("overview");
+  const statIcons = [Database, Hash, LayoutGrid];
+
   return (
-    <div className="relative pb-10">
-      {/* Top Stats Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <StatCard
-          label="Dataset"
-          value="MOOCCubeX"
-          subtext="Online learning data"
-          // Lưu ý: StatCard bài trước cần update để nhận icon nếu muốn giống hệt hình
-        />
-        <StatCard
-          label="Number of rows"
-          value="2,324,524"
-          subtext="Total number of records"
-        />
-        <StatCard
-          label="Number of columns"
-          value="181"
-          subtext="Total number of properties"
-        />
+    <div className="min-h-screen p-6 md:p-10 relative text-white">
+      <Shape />
+
+      <div className="max-w-[1400px] mx-auto mb-10 relative z-10">
+        <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-md">
+          Data Quality Analysis
+        </h1>
+        <p className="text-zinc-500 text-sm font-medium italic">
+          Comprehensive validation for MOOCCubeX dataset.
+        </p>
       </div>
 
-      {/* Main "Overview" Container */}
-      <div className="bg-[#101012] rounded-3xl p-1 border border-zinc-800/50 relative overflow-hidden">
-        {/* Tab Header giả lập */}
-        <div className="bg-zinc-900/80 w-fit px-8 py-3 rounded-tl-2xl rounded-tr-2xl text-white font-medium text-sm ml-6 mt-[-4px] relative z-10">
-          Overview
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-[1400px] mx-auto relative z-10">
+        {DQ_DATA.headerStats.map((stat, i) => (
+          <StatCard key={i} {...stat} icon={statIcons[i]} />
+        ))}
+      </div>
+
+      <div className="w-full max-w-[1400px] mx-auto">
+        <div className="flex items-end relative z-10">
+          <Tab
+            variant="start"
+            active={activeTab === "overview"}
+            onClick={() => {}}
+            label="Overview"
+          />
         </div>
 
-        {/* Nội dung chính màu xám đậm */}
-        <div className="bg-[#1c1c1f] rounded-3xl p-8 pt-10 min-h-[600px] grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-0">
-          {/* Góc trái dưới: Glow Effect */}
-          <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-yellow-600/20 blur-[100px] rounded-full pointer-events-none" />
+        <div className="bg-[#292B2A] rounded-b-2xl rounded-tr-2xl rounded-tl-none p-6 md:p-10 relative z-0 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.9)] border border-zinc-700/30">
+          <div className="animate-in fade-in slide-in-from-bottom-2 duration-500">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+              <TheorySection content={DQ_DATA.theory} />
+              <QualityBarChart data={DQ_DATA.barChart} />
 
-          {/* Quadrant 1: Theory (Top Left) */}
-          <TheorySection />
+              <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-10">
+                {DQ_DATA.donutCharts.map((chart, index) => (
+                  <QualityDonutChart
+                    key={index}
+                    title={chart.title}
+                    percent={chart.percent}
+                    label={chart.label}
+                    data={chart.data}
+                  />
+                ))}
+              </div>
 
-          {/* Quadrant 2: Bar Chart (Top Right) */}
-          <QualityBarChart />
-
-          {/* Quadrant 3: Completeness Donut (Bottom Left) */}
-          <QualityDonutChart
-            title="Overall completeness rate"
-            percent={4}
-            label="Completeness"
-            color="#fbbf24"
-            data={[
-              { label: "Complete data", value: 4, fill: "#4ade80" }, // Green
-              { label: "Incomplete data", value: 96, fill: "#fbbf24" }, // Yellow/Orange
-            ]}
-          />
-
-          {/* Quadrant 4: Consistency Donut (Bottom Right) */}
-          <QualityDonutChart
-            title="Overall consistency rate"
-            percent={4}
-            label="Consistency"
-            color="#fcd34d"
-            data={[
-              { label: "Consistency data", value: 4, fill: "#fcd34d" }, // Lighter Yellow
-              { label: "Inconsistency data", value: 96, fill: "#fbbf24" }, // Darker Yellow
-            ]}
-          />
+              <div className="lg:col-span-2 pt-10 border-t border-white/10">
+                <AccDQSection data={DQ_DATA.diagnostic} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -60,7 +60,6 @@ export const Phase = ({ version = "V0" }: PhaseProps) => {
 
       <div className="flex-1 w-full min-h-[400px] flex flex-col">
         <h3 className="text-[#A3B79C] text-sm font-medium mb-4 pl-2 flex items-center gap-2">
-          <span className="w-1.5 h-5 bg-[#D21B1B] rounded-sm"></span>
           Phase Trend Analysis:{" "}
           <span className="text-[#FFFCE6] ml-1">{activeMetric}</span>
         </h3>

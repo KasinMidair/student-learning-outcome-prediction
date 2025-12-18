@@ -1,42 +1,25 @@
+"use client";
+
 import { BookOpen } from "lucide-react";
 
-export function TheorySection() {
+export function TheorySection({ content }: { content: any[] }) {
   return (
-    <div className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800 h-full">
-      <h3 className="text-zinc-300 font-semibold mb-6">Theory</h3>
+    <div className="bg-[#1a1c1b]/60 p-8 rounded-2xl border border-white/5 h-full backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden group">
+      <h3 className="text-white text-md font-bold mb-10">Theory Foundation</h3>
+      <div className="space-y-10">
+        {content.map((item, idx) => (
+          <div key={idx} className="relative pl-8 group/item">
+            <div className="absolute left-0 top-0 w-[2px] h-full bg-orange-500/10 group-hover/item:bg-orange-500/40 transition-colors" />
 
-      <div className="space-y-6">
-        <div className="flex gap-4">
-          <div className="mt-1 text-primary shrink-0">
-            <BookOpen size={20} />
-          </div>
-          <div>
-            <h4 className="text-sm font-bold text-zinc-200 mb-1">
-              Completeness
-            </h4>
-            <p className="text-xs text-zinc-500 leading-relaxed">
-              About this course: Buscamos promover llevemos el desarrollo gfhfgh
-              fisica de nuestros atletas... ¡Unite y juntos llevemos el a otro
-              llevemos llevemos nivel!
+            <div className="flex items-center gap-3 mb-3">
+              <BookOpen size={18} className="text-orange-500" strokeWidth={2.5} />
+              <h4 className="text-md font-semibold text-white">{item.title}</h4>
+            </div>
+            <p className="text-[13px] text-zinc-500 leading-relaxed font-medium italic">
+              {item.description}
             </p>
           </div>
-        </div>
-
-        <div className="flex gap-4">
-          <div className="mt-1 text-primary shrink-0">
-            <BookOpen size={20} />
-          </div>
-          <div>
-            <h4 className="text-sm font-bold text-zinc-200 mb-1">
-              Consistency
-            </h4>
-            <p className="text-xs text-zinc-500 leading-relaxed">
-              About this course: Buscamos promover llevemos el desarrollo gfhfgh
-              fisica de nuestros atletas... ¡Unite y juntos llevemos el a otro
-              llevemos llevemos nivel!
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

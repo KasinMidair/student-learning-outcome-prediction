@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import { BarChart3, Activity } from "lucide-react";
+import { useState } from "react";
 
 import { EXPERIMENT_DATA, VERSIONS } from "../../../../../data/experiment";
 import { Selector } from "@/components/ui/selector";
@@ -17,12 +16,7 @@ export default function ExperimentPage() {
   const currentData = EXPERIMENT_DATA[selectedVersion] || EXPERIMENT_DATA["V0"];
 
   return (
-    <div
-      className="min-h-screen font-sans p-6 md:p-10 relative text-white"
-      style={{
-        background: "bg-[#292B2A]/50",
-      }}
-    >
+    <div className="min-h-screen font-sans p-6 md:p-10 relative text-white">
       <Shape />
 
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
@@ -30,7 +24,7 @@ export default function ExperimentPage() {
           <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-md">
             Experiment Results
           </h1>
-          <p className="text-zinc-400 text-sm">
+          <p className="text-zinc-500 text-sm font-medium italic">
             Comprehensive analysis of model performance metrics.
           </p>
         </div>
@@ -54,14 +48,12 @@ export default function ExperimentPage() {
             active={activeTab === "overview"}
             onClick={() => setActiveTab("overview")}
             label="Overview"
-            icon={<BarChart3 size={16} />}
           />
           <Tab
             variant="middle"
             active={activeTab === "phase"}
             onClick={() => setActiveTab("phase")}
             label="Phase"
-            icon={<Activity size={16} />}
           />
         </div>
 

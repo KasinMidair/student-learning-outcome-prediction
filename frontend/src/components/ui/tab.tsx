@@ -6,28 +6,21 @@ interface TabButtonProps {
   active: boolean;
   onClick: () => void;
   label: string;
-  icon: React.ReactNode;
   variant?: "start" | "middle";
 }
 
-export const Tab = ({
-  active,
-  onClick,
-  label,
-  icon,
-  variant = "middle",
-}: TabButtonProps) => {
+export const Tab = ({ active, onClick, label, variant = "middle" }: TabButtonProps) => {
   const clipPathUrl =
     variant === "start" ? "url(#tab-shape-start)" : "url(#tab-shape-middle)";
 
-  const paddingClass = variant === "start" ? "pl-6 pr-14" : "px-12";
+  const paddingClass = variant === "start" ? "pl-8 pr-14" : "px-12";
 
   return (
     <button
       onClick={onClick}
       style={{ clipPath: clipPathUrl }}
       className={`
-        relative flex items-center gap-2 pt-3 pb-2 text-md font-bold transition-all duration-200
+        relative flex items-center gap-2 pt-3 pb-3 text-lg font-bold transition-all duration-200
         ${paddingClass}
         -ml-8 first:ml-0
 
@@ -38,9 +31,6 @@ export const Tab = ({
         }
       `}
     >
-      <span className={`relative z-20 ${active ? "text-white" : "opacity-50"}`}>
-        {icon}
-      </span>
       <span className="relative z-20 tracking-wide">{label}</span>
     </button>
   );
