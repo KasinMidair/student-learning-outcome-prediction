@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import CustomLegend from "@/components/custom-legend";
+import { cn } from "@/lib/utils";
 
 interface PieChartItem {
   name: string;
@@ -20,14 +21,24 @@ interface PieChartItem {
 
 interface OutcomePieChartProps {
   data: PieChartItem[];
-  tittle: string;
+  title: string | null;
+  className?: string;
 }
 
-export function CustomPieChart({ data, tittle }: OutcomePieChartProps) {
+export function CustomPieChart({
+  data,
+  title = null,
+  className,
+}: OutcomePieChartProps) {
   return (
-    <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#323734_100%)] border-0 shadow-xl shadow-black/30 min-w-[300px]">
+    <Card
+      className={cn(
+        "bg-[linear-gradient(to_bottom,#2A2C2B_10%,#323734_100%)] border-0 shadow-xl shadow-black/30 min-w-[300px]",
+        className
+      )}
+    >
       <CardHeader>
-        <CardTitle className="text-xl font-medium">{tittle}</CardTitle>
+        <CardTitle className="text-xl font-medium">{title}</CardTitle>
       </CardHeader>
 
       <CardContent className="h-[250px] relative border-0 p-2">

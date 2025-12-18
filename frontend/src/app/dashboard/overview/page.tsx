@@ -29,12 +29,14 @@ import { CustomPieChart } from "@/components/pie-chart";
 // --- DỮ LIỆU GIẢ LẬP (MOCK DATA) ---
 
 const lineData = [
-  { name: "Jan", score: 400 },
-  { name: "Feb", score: 300 },
-  { name: "Mar", score: 550 },
-  { name: "Apr", score: 450 },
-  { name: "May", score: 600 },
-  { name: "Jun", score: 700 },
+  [
+    { name: "Jan", score: 400 },
+    { name: "Feb", score: 300 },
+    { name: "Mar", score: 550 },
+    { name: "Apr", score: 450 },
+    { name: "May", score: 600 },
+    { name: "Jun", score: 700 },
+  ],
 ];
 
 const labelData = [
@@ -54,6 +56,9 @@ const barChartData = [
 ];
 
 const courseData = [
+  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
+  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
+  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
   { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
   { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
   { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
@@ -123,7 +128,8 @@ export default function OverviewPage() {
           {/* Line Chart Area - Chiếm 2 phần */}
           <CustomLineChart
             data={lineData}
-            title="Monthly Student Enrollment in Courses"
+            labels={["Enrollment"]}
+            title="Monthly Student Enrollment in Courses Nearly"
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_4fr] gap-6">
@@ -171,7 +177,7 @@ export default function OverviewPage() {
             {/* monthly top 7 pass rate */}
             <RateBarChart
               data={barChartData}
-              tittle="Top 7 Monthly Pass Rate of Users"
+              title="Top 7 Monthly Pass Rate of Users"
             />
           </div>
         </div>
@@ -180,7 +186,7 @@ export default function OverviewPage() {
           {/* label distribution */}
           <CustomPieChart
             data={labelData}
-            tittle="Learning outcome distribution"
+            title="Learning outcome distribution"
           />
           {/* Leaderboard Table */}
           <Shape />
@@ -238,7 +244,7 @@ export default function OverviewPage() {
                         className="border-zinc-800 w-full hover:bg-zinc-800/50 transition-colors  "
                         style={{
                           backgroundColor:
-                            index % 2 === 0 ? "transparent" : "#ffffff3b",
+                            index % 2 !== 0 ? "transparent" : "#ffffff3b",
                         }}
                       >
                         <TableCell className="text-sm  text-left text-zinc-300 pl-6 py-3">

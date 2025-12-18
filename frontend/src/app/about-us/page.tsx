@@ -249,7 +249,7 @@ export default function AboutUsPage() {
             <Snowflake className="text-[#FFD700] w-6 h-6" />
           </div>
 
-          <div className="flex">
+          <div className="flex gap-24">
             <h2 className="text-3xl font-serif text-[#efc69] z-10 font-bold">
               Members
             </h2>
@@ -260,12 +260,13 @@ export default function AboutUsPage() {
                   className="flex items-center gap-4 relative group"
                 >
                   {/* Avatar */}
-                  <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0 overflow-hidden border-2 border-[#FFD700] shadow-lg">
+                  <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0 overflow-hidden shadow-lg">
                     <Image
-                      src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${member.name}`}
+                      src={`https://res.cloudinary.com/dpqv7ag5w/image/upload/v1766052281/Footer_37_ijf3v4.png`}
                       alt="avatar"
                       width={64}
                       height={64}
+                      className="object-cover w-full h-full"
                     />
                   </div>
 

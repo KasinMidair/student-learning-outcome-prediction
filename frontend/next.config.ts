@@ -2,6 +2,15 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/dashboard/overview",
+        permanent: false,
+      },
+    ];
+  },
   images: {
     domains: ["res.cloudinary.com"],
     remotePatterns: [

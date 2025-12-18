@@ -2,36 +2,29 @@
 
 import React from "react";
 
-export const InfoShape = ({
-  className = "",
-  children,
-}: {
+interface InfoShapeProps {
   className?: string;
   children?: React.ReactNode;
-}) => {
+}
+
+export const InfoShape = ({ className = "", children }: InfoShapeProps) => {
   return (
-    <div className={`relative w-full h-full ${className}`}>
+    <div className={`relative w-full h-full overflow-hidden ${className}`}>
+      {/* SVG Background - Đã chỉnh mép dưới ngắn lại mức trung bình */}
       <svg
-        className="absolute"
-        xmlns="http://www.w3.org/2000/svg"
-        width="715"
-        height="449"
-        viewBox="0 0 715 449"
+        className="absolute inset-0 w-full h-full"
+        viewBox="0 0 821 585" // Đã chỉnh viewBox cho khớp chiều cao mới
         fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none" // Quan trọng để co giãn theo Grid
       >
-        <g filter="url(#filter0_d_292_1669)">
-          <path
-            d="M705 173C705 181.284 698.284 188 690 188H329.57C321.286 188 314.57 194.716 314.57 203V424C314.57 432.284 307.855 439 299.57 439H17C8.71573 439 2 432.284 2 424V17C2 8.71573 8.71573 2 17 2H690C698.284 2 705 8.71573 705 17V173Z"
-            fill="url(#paint0_linear_292_1669)"
-          />
-        </g>
         <defs>
           <filter
-            id="filter0_d_292_1669"
+            id="filter0_d_335_2184"
             x="0"
             y="0"
-            width="715"
-            height="449"
+            width="821"
+            height="585"
             filterUnits="userSpaceOnUse"
             colorInterpolationFilters="sRGB"
           >
@@ -52,41 +45,58 @@ export const InfoShape = ({
             <feBlend
               mode="normal"
               in2="BackgroundImageFix"
-              result="effect1_dropShadow_292_1669"
+              result="effect1_dropShadow_335_2184"
             />
             <feBlend
               mode="normal"
               in="SourceGraphic"
-              in2="effect1_dropShadow_292_1669"
+              in2="effect1_dropShadow_335_2184"
               result="shape"
             />
           </filter>
+          <radialGradient
+            id="paint0_radial_335_2184"
+            cx="0"
+            cy="0"
+            r="1"
+            gradientUnits="userSpaceOnUse"
+            gradientTransform="translate(512.5 330) rotate(90) scale(182 201.5)"
+            className=""
+          >
+            <stop stopColor="#EFC690" stopOpacity="0.41" />
+            <stop offset="1" stopColor="#737373" stopOpacity="0" />
+          </radialGradient>
+
           <linearGradient
-            id="paint0_linear_292_1669"
-            x1="343.5"
+            id="paint1_linear_335_2184"
+            x1="410.5"
             y1="2"
-            x2="343.5"
-            y2="449.898"
+            x2="410.5"
+            y2="574"
             gradientUnits="userSpaceOnUse"
           >
             <stop offset="0.4" stopColor="#292B2A" />
             <stop offset="1" stopColor="#323734" />
           </linearGradient>
         </defs>
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            background:
-              "radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, rgba(239, 198, 144, 0.41) 0%, rgba(115, 115, 115, 0) 100%)",
-          }}
-        />
+
+        {/* Path đã chỉnh ngắn mép dưới (V559 và 574) */}
+        <g filter="url(#filter0_d_335_2184)">
+          <path
+            d="M811 292.906C811 301.191 804.284 307.906 796 307.906H520.967C512.683 307.906 505.967 314.622 505.967 322.906V559.083C505.967 567.367 499.251 574.083 490.967 574.083H17C8.71573 574.083 2 567.367 2 559.083V17C2 8.71576 8.71573 2 17 2H796C804.284 2 811 8.71573 811 17V292.906Z"
+            fill="url(#paint1_linear_335_2184)"
+          />
+          {/* Lớp phủ Glow sáng nhẹ */}
+          <path
+            d="M811 292.906C811 301.191 804.284 307.906 796 307.906H520.967C512.683 307.906 505.967 314.622 505.967 322.906V559.083C505.967 567.367 499.251 574.083 490.967 574.083H17C8.71573 574.083 2 567.367 2 559.083V17C2 8.71576 8.71573 2 17 2H796C804.284 2 811 8.71573 811 17V292.906Z"
+            fill="url(#paint0_radial_335_2184)"
+            opacity="0.5"
+          />
+        </g>
       </svg>
 
-      <div
-        className="pl-8 w-full h-full"
-        style={{ clipPath: "url(#folder-shape)" }}
-      >
+      {/* Content bên trên */}
+      <div className="relative z-10 w-full h-full p-4 md:p-6 overflow-hidden">
         {children}
       </div>
     </div>

@@ -51,14 +51,12 @@ export default function ExperimentPage() {
             active={activeTab === "Course Infomation"}
             onClick={() => setActiveTab("Course Infomation")}
             label="Course Infomation"
-            icon={<BarChart3 size={16} />}
           />
           <Tab
             variant="middle"
             active={activeTab === "User Infomation"}
             onClick={() => setActiveTab("User Infomation")}
             label="User Infomation"
-            icon={<Activity size={16} />}
           />
         </div>
 

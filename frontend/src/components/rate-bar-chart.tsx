@@ -19,14 +19,14 @@ interface BarChartItem {
 
 interface TopPassRateBarChartProps {
   data: BarChartItem[];
-  tittle: string;
+  title: string;
 }
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-zinc-800 border border-zinc-700 p-2 rounded shadow-md text-xs ">
-        <p className="font-semibold mb-1">{label}</p>
+      <div className="bg-zinc-800 border border-zinc-700 p-2 rounded shadow-md">
+        <p className="font-semibold mb-1 text-base ">{label}</p>
         <p style={{ color: payload[0].color }}>
           {payload[0].name}: {payload[0].value}
         </p>
@@ -36,7 +36,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-export function RateBarChart({ data, tittle }: TopPassRateBarChartProps) {
+export function RateBarChart({ data, title }: TopPassRateBarChartProps) {
   const processedData = useMemo(() => {
     return data.map((item) => ({
       ...item,
@@ -45,51 +45,50 @@ export function RateBarChart({ data, tittle }: TopPassRateBarChartProps) {
   }, [data]);
 
   return (
-    <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#323734_100%)] border-0 shadow-xl shadow-black/30">
-      <CardHeader>
-        <CardTitle className="text-xl">{tittle}</CardTitle>
+    <Card className="h-full flex flex-col bg-[linear-gradient(to_bottom,#2A2C2B_10%,#323734_100%)] border-0 shadow-xl shadow-black/30">
+      <CardHeader className="shrink-0">
+        <CardTitle className="text-xl">{title}</CardTitle>
       </CardHeader>
-      <CardContent className="h-[250px] w-full">
+
+      <CardContent className="flex-1 w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={processedData}>
+          <BarChart data={processedData} barCategoryGap="25%" barGap={4}>
             <defs>
-              <linearGradient
-                id="colorGradient"
-                x1="50%"
-                y1="0"
-                x2="50%"
-                y2="1"
-              >
-                <stop offset="o%" stopColor="#58D764" />
+              <linearGradient id="colorGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#58D764" />
                 <stop offset="100%" stopColor="#FBE947" />
               </linearGradient>
             </defs>
+
             <CartesianGrid
               strokeDasharray="3 3"
               vertical={false}
               stroke="#27272a"
             />
+
             <XAxis
               dataKey="name"
               stroke="#71717a"
-              fontSize={10}
+              fontSize={14}
               tickLine={false}
               axisLine={false}
             />
+
             <Tooltip cursor={{ fill: "#27272a" }} content={<CustomTooltip />} />
 
-            <Bar dataKey="rate" stackId="total" fill="#fbbf24" barSize={30}>
-              {processedData.map((entry, index) => (
+            <Bar dataKey="rate" stackId="total">
+              {processedData.map((_, index) => (
                 <Cell
-                  key={`cell-${index}`}
+                  key={index}
                   fill="url(#colorGradient)"
-                  fillOpacity={0.8}
+                  fillOpacity={0.85}
                 />
               ))}
             </Bar>
-            <Bar dataKey="remain" stackId="total" barSize={30}>
-              {processedData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill="#ffffff" fillOpacity={0.1} />
+
+            <Bar dataKey="remain" stackId="total">
+              {processedData.map((_, index) => (
+                <Cell key={index} fill="#ffffff" fillOpacity={0.1} />
               ))}
             </Bar>
           </BarChart>
