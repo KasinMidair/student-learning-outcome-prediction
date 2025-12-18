@@ -1,14 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import { BarChart3, Activity } from "lucide-react";
+import { useState } from "react";
 
-import { EXPERIMENT_DATA, VERSIONS } from "../../../../../../data/experiment";
-import { Selector } from "@/components/ui/selector";
 import { Tab } from "@/components/ui/tab";
 import { Shape } from "@/components/ui/shape";
-import { Overview } from "@/components/experiment/overview";
-import { Phase } from "@/components/experiment/phase";
 import CourseDashboard from "@/components/course-detail/basic-info";
 import { useParams } from "next/navigation";
 import UserCourse from "@/components/course-detail/user-course";
@@ -17,12 +12,9 @@ export default function ExperimentPage() {
   const params = useParams();
   const courseId = params.courseId as string;
 
-  const [activeTab, setActiveTab] = useState<
-    "Course Infomation" | "User Infomation"
-  >("Course Infomation");
-  const [selectedVersion, setSelectedVersion] = useState<string>("V0");
-
-  const currentData = EXPERIMENT_DATA[selectedVersion] || EXPERIMENT_DATA["V0"];
+  const [activeTab, setActiveTab] = useState<"Course Infomation" | "User Infomation">(
+    "Course Infomation"
+  );
 
   return (
     <div
@@ -51,14 +43,12 @@ export default function ExperimentPage() {
             active={activeTab === "Course Infomation"}
             onClick={() => setActiveTab("Course Infomation")}
             label="Course Infomation"
-            icon={<BarChart3 size={16} />}
           />
           <Tab
             variant="middle"
             active={activeTab === "User Infomation"}
             onClick={() => setActiveTab("User Infomation")}
             label="User Infomation"
-            icon={<Activity size={16} />}
           />
         </div>
 

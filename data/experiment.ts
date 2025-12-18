@@ -1517,7 +1517,6 @@ export const PHASE_DATA: any = {
     ],
   },
   V6: {
-    // COPY V5 (Bạn có thể sửa số ở đây cho V6)
     Accuracy: [
       {
         name: "Phase 1",
