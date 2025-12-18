@@ -4,6 +4,7 @@ import Image from "next/image";
 import {
   Snowflake,
   Github,
+  CandyCane,
   Facebook,
   Twitter,
   Instagram,
@@ -169,8 +170,15 @@ export default function AboutUsPage() {
       </section>
 
       {/* --- SECTION 5: MEMBERS (RED) --- */}
-      <section className="bg-[#B93836] py-16 px-6 md:px-12 relative overflow-hidden">
+      <section className="py-16  px-6 md:px-12 relative overflow-hidden">
         {/* Decorations */}
+        <Image
+          src="https://res.cloudinary.com/dpqv7ag5w/image/upload/v1765888145/image_1770_vdqjbu.png"
+          alt="Hero background"
+          fill
+          priority
+          className="object-cover object-bottom scale-105 origin-bottom "
+        />
         <div className="absolute top-4 left-4 text-[#A02826]">
           <Snowflake className="w-24 h-24" />
         </div>
@@ -210,17 +218,14 @@ export default function AboutUsPage() {
           </div>
           {/* Cây thông trang trí (vẽ bằng CSS hoặc SVG) */}
           <div className="absolute bottom-0 right-0 opacity-30">
-            <svg width="200" height="200" viewBox="0 0 100 100" fill="white">
-              <path d="M50 10 L10 90 H90 Z" />
-            </svg>
+            <CandyCane className="mt-10 w-24 h-24" />
           </div>
         </div>
       </section>
 
-      {/* --- SECTION 6: FOOTER --- */}
-      <footer className="bg-[#1a1a1a] text-gray-400 py-12 px-6 border-t border-gray-800 relative">
-        {/* Giả lập hình nền quả thông/gỗ bằng gradient */}
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')] opacity-20"></div>
+      {/* ---  FOOTER --- */}
+      <footer className="bg-[#1a1a1a] h-[50vh] mt-15 text-gray-400 py-12 px-6 border-t border-gray-800 relative">
+        <div className="absolute inset-0 bg-[url('https://res.cloudinary.com/dpqv7ag5w/image/upload/v1766052281/Footer_37_ijf3v4.png')] "></div>
 
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10 text-xs md:text-sm">
           <div>
