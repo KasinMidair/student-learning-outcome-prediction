@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 interface StatCardProps {
   label: string;
   value: string;
-  subtext: string;
+  subtext?: string;
   icon: LucideIcon;
   // 2. Thêm prop className (optional)
   className?: string;
@@ -40,9 +40,9 @@ export function StatCard({
         </h3>
 
         <p className="text-md text-zinc-300 font-medium">{label}</p>
-        <p className="text-[13px] text-zinc-500 mt-1 tracking-wider">
-          {subtext}
-        </p>
+        {subtext && (
+          <p className="text-[13px] text-zinc-500 mt-1 tracking-wider">{subtext}</p>
+        )}
       </CardContent>
     </Card>
   );

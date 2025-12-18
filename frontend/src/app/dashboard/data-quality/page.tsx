@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Database, Hash, LayoutGrid } from "lucide-react";
+import { Database, Rows3, Columns3 } from "lucide-react";
 
 import { StatCard } from "@/components/ui/stat-card";
 import { Tab } from "@/components/ui/tab";
@@ -15,13 +15,13 @@ import { DQ_DATA } from "../../../../../data/quality";
 
 export default function DataQualityPage() {
   const [activeTab] = useState<"overview">("overview");
-  const statIcons = [Database, Hash, LayoutGrid];
+  const statIcons = [Database, Rows3, Columns3];
 
   return (
-    <div className="min-h-screen p-6 md:p-10 relative text-white">
+    <div className="text-white font-sans relative overflow-hidden">
       <Shape />
 
-      <div className="max-w-[1400px] mx-auto mb-10 relative z-10">
+      <div className="w-full mx-auto mb-8 relative z-10">
         <h1 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-md">
           Data Quality Analysis
         </h1>
@@ -30,13 +30,13 @@ export default function DataQualityPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-[1400px] mx-auto relative z-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 w-full mx-auto relative z-10">
         {DQ_DATA.headerStats.map((stat, i) => (
           <StatCard key={i} {...stat} icon={statIcons[i]} />
         ))}
       </div>
 
-      <div className="w-full max-w-[1400px] mx-auto">
+      <div className="w-full mx-auto">
         <div className="flex items-end relative z-10">
           <Tab
             variant="start"

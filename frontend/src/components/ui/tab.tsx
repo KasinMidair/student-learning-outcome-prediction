@@ -20,7 +20,7 @@ export const Tab = ({ active, onClick, label, variant = "middle" }: TabButtonPro
       onClick={onClick}
       style={{ clipPath: clipPathUrl }}
       className={`
-        relative flex items-center gap-2 pt-3 pb-3 text-lg font-bold transition-all duration-200
+        relative flex items-center gap-2 pt-3 pb-3 text-base font-bold transition-all duration-200
         ${paddingClass}
         -ml-8 first:ml-0
 
