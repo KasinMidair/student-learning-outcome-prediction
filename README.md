@@ -12,7 +12,7 @@ Cung cấp kết quả dự đoán thông qua giao diện web
 
 ## Cách chạy
 
-### Frontend: Next.js – Backend: NestJS
+### Frontend: Next.js 
 
 Lần đầu chạy sẽ cần cài đặt `pnpm`. Chạy lệnh sau:
 
@@ -36,29 +36,5 @@ pnpm dev
 
 Trang web giờ đang ở http://localhost:3000.
 
-## Cách gọi api
+#### các file data đặt trong /data nhé
 
-Trước hết ta xem có API nào để gọi. Có thể truy cập trang http://localhost:5000/api để xem danh sách tất cả API của backend.
-<img width="1901" height="855" alt="image" src="https://github.com/user-attachments/assets/275aae87-6c8c-4f32-99fc-69d292be88ee" />
-
-
-Sau khi biết có API thì sử dụng httpClient từ `@/lib/client`
-
-```tsx
-import { Button } from "./components/ui/button";
-import httpClient from "@/lib/client";
-
-function App() {
-  async function doSomething() {
-    console.log("api result: ", await httpClient.get("/users"));
-  }
-  return (
-    <div>
-      <h1>Welcome to the App!</h1>
-      <Button onClick={doSomething}>Hello</Button>
-    </div>
-  );
-}
-
-export default App;
-```

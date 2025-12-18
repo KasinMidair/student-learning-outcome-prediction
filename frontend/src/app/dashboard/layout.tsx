@@ -26,12 +26,7 @@ export default function DashboardLayout({
           alt="Hero background"
           fill
           priority
-          className=" 
-            object-contain
-            object-left-bottom
-            absolute
-            z-0
-            pointer-events-none"
+          className="object-contain object-left-bottom absolute z-0 pointer-events-none"
         />
         <header className="relative z-10 flex justify-end items-center p-6  pb-4">
           <div className="flex bg-zinc-900 rounded-full p-1">
