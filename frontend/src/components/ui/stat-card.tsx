@@ -2,7 +2,6 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { LucideIcon } from "lucide-react";
-// 1. Import cn để gộp class
 import { cn } from "@/lib/utils";
 
 interface StatCardProps {
@@ -10,7 +9,6 @@ interface StatCardProps {
   value: string;
   subtext?: string;
   icon: LucideIcon;
-  // 2. Thêm prop className (optional)
   className?: string;
 }
 
@@ -29,7 +27,7 @@ export function StatCard({
           className
         )}
       >
-        <div className="absolute top-6 left-7 w-6 h-6 rounded-full bg-[#FFFCE6]/100 blur-[20px]" />
+        <div className="absolute top-2 left-7 w-6 h-6 rounded-full bg-[#FFFCE6]/100 blur-[20px]" />
 
         <div className="relative z-10 w-9 h-9 rounded-lg flex items-center justify-center text-white mb-3">
           <Icon size={24} strokeWidth={1.8} />
