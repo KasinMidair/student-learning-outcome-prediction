@@ -64,8 +64,6 @@ const courseData = [
   { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
   { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
   { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
-  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
-  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
 ];
 
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -123,18 +121,19 @@ export default function OverviewPage() {
         ))}
       </div>
 
-      <div className="  grid grid-cols-1  md:grid-cols-[5fr_3fr]  gap-6 w-full">
-        <div className="grid grid-cols-1 lg:grid-row-2 gap-y-6">
+      <div className="  grid grid-cols-1  md:grid-cols-[2fr_1fr]  gap-6 w-full">
+        <div className="grid grid-cols-1 lg:grid-row-[2fr_fr] auto-rows-min  gap-y-6">
           {/* Line Chart Area - Chiếm 2 phần */}
           <CustomLineChart
             data={lineData}
             labels={["Enrollment"]}
             title="Monthly Student Enrollment in Courses Nearly"
+            className="h-[450px]"
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_4fr] gap-6">
+          <div className="grid grid-cols-1  lg:grid-cols-[2fr_4fr] auto-rows-min gap-6">
             {/* Pass Rate Gauge */}
-            <Card className="bg-[linear-gradient(to_bottom,#2A2C2B_10%,#323734_100%)] border-0 shadow-xl shadow-black/30">
+            <Card className="h-full  bg-[linear-gradient(to_bottom,#2A2C2B_10%,#323734_100%)] border-0 shadow-xl shadow-black/30">
               <CardHeader>
                 <CardTitle className="text-xl text-center">
                   Pass Rate Summary
@@ -217,22 +216,22 @@ export default function OverviewPage() {
               className={`
             bg-[linear-gradient(to_bottom,#2A2C2B_70%,#303231_100%)] border-0 text-white shadow-xxl shadow-black/30
             rounded-b-xl rounded-tr-xl rounded-tl-none 
-            pt-4 md:pt-6
+            pt-4
             relative z-0
 
           `}
             >
-              <div className="animate-in fade-in zoom-in-95 duration-300 h-full pt-3">
+              <div className="animate-in fade-in zoom-in-95 duration-300 h-full ">
                 <Table>
                   <TableHeader>
                     <TableRow className=" border-zinc-800 hover:bg-transparent">
-                      <TableHead className="pl-6  h-8 text-sm font-semibold ">
+                      <TableHead className="pl-6  h-8 text-sm font-semibold py-6 ">
                         Course Id
                       </TableHead>
                       <TableHead className=" h-8  text-center text-sm  font-semibold">
                         Total Registration
                       </TableHead>
-                      <TableHead className="  h-8 text-sm text-right font-semibold pr-4">
+                      <TableHead className="  h-8 text-sm text-right font-semibold pr-4 ">
                         Pass Rate
                       </TableHead>
                     </TableRow>
@@ -247,13 +246,13 @@ export default function OverviewPage() {
                             index % 2 !== 0 ? "transparent" : "#ffffff3b",
                         }}
                       >
-                        <TableCell className="text-sm  text-left text-zinc-300 pl-6 py-3">
+                        <TableCell className=" py-2 text-left text-zinc-300 pl-6">
                           {row.courseId}
                         </TableCell>
-                        <TableCell className="py-2 text-sm  text-center text-zinc-400">
+                        <TableCell className=" text-center text-zinc-400">
                           {row.totalRegistration}
                         </TableCell>
-                        <TableCell className="py-2 text-sm text-right font-bold text-green-400 pr-6">
+                        <TableCell className=" text-right font-bold text-green-400 pr-6">
                           {row.passRate}%
                         </TableCell>
                       </TableRow>

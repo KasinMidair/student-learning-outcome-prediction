@@ -6,11 +6,15 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const router = useRouter();
 
-  const handleNavigate = () => {
-    router.push("/about-us");
+  const handleNavigate = (route: string) => {
+    router.push(route);
   };
 
   return (
@@ -25,12 +29,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           priority
           className="object-contain object-left-bottom absolute z-0 pointer-events-none"
         />
-        <header className="relative z-10 flex justify-end items-center p-6  pb-4">
+        <header className="relative z-10 flex justify-end items-center p-6 gap-6  pb-4">
           <div className="flex bg-zinc-900 rounded-full p-1">
             <Button
               variant="ghost"
-              onClick={handleNavigate}
-              className="rounded-full px-6 hover:text-primary"
+              onClick={() => {
+                handleNavigate("/about-us");
+              }}
+              className="rounded-full px-6 hover:text-primary "
             >
               About Us
             </Button>

@@ -10,67 +10,19 @@ import {
   Instagram,
   ArrowRight,
 } from "lucide-react";
-import { url } from "inspector";
 
-interface Member {
-  id: number;
-  name: string;
-  studentId: string;
-  classId: string;
-  color?: string; // Màu đặc biệt cho thành viên đầu tiên (để làm hiệu ứng picker)
-}
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
-// 2. Tạo Data bên ngoài (7 thành viên)
-const MEMBERS_DATA: Member[] = [
-  {
-    id: 1,
-    name: "Nguyễn Hồng Phát",
-    studentId: "22521072",
-    classId: "KHMT2202.3",
-  },
-  {
-    id: 2,
-    name: "Trần Văn B",
-    studentId: "22521073",
-    classId: "KHMT2202.3",
-  },
-  {
-    id: 3,
-    name: "Lê Thị C",
-    studentId: "22521074",
-    classId: "KHMT2202.3",
-  },
-  {
-    id: 4,
-    name: "Phạm Văn D",
-    studentId: "22521075",
-    classId: "KHMT2202.3",
-  },
-  {
-    id: 5,
-    name: "Hoàng Thị E",
-    studentId: "22521076",
-    classId: "KHMT2202.3",
-  },
-  {
-    id: 6,
-    name: "Vũ Văn F",
-    studentId: "22521077",
-    classId: "KHMT2202.3",
-  },
-  {
-    id: 7,
-    name: "Đặng Thị G",
-    studentId: "22521078",
-    classId: "KHMT2202.3",
-  },
-];
+import { MEMBERS_DATA } from "./../../../../data/member";
 
 export default function AboutUsPage() {
+  const router = useRouter();
+
   return (
     <div className=" w-full font-sans overflow-x-hidden bg-[image:var(--background-gradient)] dark ">
       {/* --- HERO --- */}
-      <section className=" relative text-white py-20 px-40 md:px-12 flex flex-col items-center justify-center text-center">
+      <section className=" relative text-white py-40  flex flex-col items-center justify-center text-center">
         <Image
           src="https://res.cloudinary.com/dpqv7ag5w/image/upload/v1765888145/image_1770_vdqjbu.png"
           alt="Hero background"
@@ -83,16 +35,20 @@ export default function AboutUsPage() {
         <Snowflake className="absolute bottom-10 right-20 w-12 h-12 opacity-40 animate-bounce" />
         <Snowflake className="absolute top-20 right-1/4 w-6 h-6 opacity-60 " />
 
-        <div className="z-10 max-w-4xl mt-10">
-          <div className="flex items-center justify-center gap-2 mb-4 opacity-90">
+        <div className="z-10 max-w-4xl grid grid-row-3 gap-2">
+          <div className="flex items-center text-sm justify-center gap-2 mb-6 opacity-90">
             <Snowflake className="w-5 h-5" />
-            <span className="uppercase tracking-widest text-sm font-semibold">
+
+            <span
+              className="uppercase tracking-widest text-[#f5b562]  font-extrabold
+"
+            >
               Season&apos;s Greetings from Our Team
             </span>
             <Snowflake className="w-5 h-5" />
           </div>
 
-          <h1 className="torn-paper text-4xl md:text-6xl font-bold mb-6 font-serif leading-tight">
+          <h1 className="torn-paper  text-[#efc690] text-4xl md:text-6xl font-bold mb-6 font-serif leading-tight">
             Predicting Academic <br /> Success with AI
             <svg width="0" height="0">
               <filter id="torn">
@@ -113,36 +69,59 @@ export default function AboutUsPage() {
             </svg>
           </h1>
 
-          <p className="text-sm md:text-base max-w-2xl text-semibold mx-auto text-[#2A2B2C] mb-8 leading-relaxed">
+          <p className=" max-w-2xl text-semibold mx-auto text-[#2A2B2C] mb-8 leading-relaxed">
             Empowering educators and students with cutting-edge machine learning
             technologies to analyze and predict academic outcomes using real
             datasets.
           </p>
         </div>
+
+        <Button
+          variant="ghost"
+          onClick={() => {
+            router.push("/dashboard/overview");
+          }}
+          className="rounded-full  p-6 px-10 hover:text-primary z-10 bg-[image:var(--background-gradient)] hover:scale-105 "
+        >
+          <p className=" bg-[linear-gradient(to_right,#F5B562B5,#FFFCE6)] bg-clip-text text-transparent">
+            Ours Reseach
+          </p>
+        </Button>
       </section>
 
       {/* ---  DARK INTRO --- */}
-      <section className=" text-white py-16 px-6 md:px-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative">
+      <section className="relative overflow-hidden min-h-screen text-white py-24 px-6 md:px-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative">
+        <Image
+          src="https://res.cloudinary.com/dpqv7ag5w/image/upload/v1765893126/Mask_group_bzkusm.png"
+          alt="Hero background"
+          fill
+          priority
+          className="absolute scale-200 scale-x-[-1]  bottom-0 z-1 pointer-events-none object-contain object-left-bottom "
+        />
         <div className="space-y-6 z-10">
           <div className="flex items-center gap-2 text-[#CDAA7D]">
-            <span className="border border-[#CDAA7D] px-2 py-0.5 rounded text-xs">
+            <span className="border border-[#CDAA7D] px-6 py-2 rounded text-xs">
               Our Mission
             </span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#CDAA7D]">
+          <h2 className="text-3xl md:text-4xl  pt-6 font-serif font-bold text-[#CDAA7D]">
             Predicting Academic <br /> Success with AI
           </h2>
-          <p className="text-gray-400 text-sm leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            euismod, nisl vel tincidunt lacinia, ligula diam fringilla lectus,
-            in varius risus augue a erat. Cras at enim mi. Mauris ut dignissim
-            tortor.
+          <p className="text-gray-400  leading-relaxed">
+            We aim to leverage data-driven and artificial intelligence
+            techniques to early predict students’ academic performance. By
+            analyzing learning behaviors, academic records, and related factors,
+            our system helps identify students who may face academic
+            difficulties at an early stage. This enables educators and
+            institutions to provide timely interventions, personalized support,
+            and informed decision-making, ultimately improving learning outcomes
+            and student success.
           </p>
         </div>
 
         {/* Abstract 3D Snowflake Graphic */}
-        <div className="relative flex justify-center items-center opacity-30 md:opacity-100">
-          <div className="w-64 h-64 md:w-80 md:h-80 border-4 border-[#333] rounded-full flex items-center justify-center animate-spin-slow">
+        <div className="relative flex justify-center items-center opacity-30 md:opacity-100 z-0">
+          <div className="w-64 h-64 md:w-80 md:h-80 rounded-full flex items-center justify-start animate-spin-slow">
             <Snowflake className="w-40 h-40 text-[#222]" />
           </div>
         </div>
@@ -164,7 +143,7 @@ export default function AboutUsPage() {
             <span>MOOC/Dataset.csv</span>
           </div>
           <div className="p-0">
-            <div className=" relative w-full h-[65vh] con bg-gray-100 flex items-center justify-center text-gray-400">
+            <div className=" relative  w-full h-[65vh] con bg-gray-100 flex items-center justify-center text-gray-400">
               <Image
                 fill
                 priority
@@ -175,7 +154,7 @@ export default function AboutUsPage() {
             </div>
           </div>
         </div>
-        <p className="text-gray-500 text-xs mt-6 max-w-2xl mx-auto">
+        <p className="max-w-2xl text-semibold  text-[#2A2B2C]  leading-relaxed mt-12 mx-auto">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod,
           nisl vel tincidunt lacinia, ligula diam fringilla lectus, in varius
           risus augue a erat.
@@ -183,15 +162,12 @@ export default function AboutUsPage() {
       </section>
 
       {/* --- CONTENT GRID --- */}
-      <section className="bg-[#0F1110] py-20 px-6 md:px-20 relative">
-        <div className="absolute top-0 right-0 h-full w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
-        <div className="absolute top-0 left-0 h-full w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <section className="bg-[#0F1110] h-[80vh] px-6 md:px-20 relative flex items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Card 1 */}
           <div className=" bg-[linear-gradient(to_bottom,#2A2C2B_70  %,#303231_100%)] shadow-xxl shadow-black/30 p-8 rounded-md hover:bg-white/10 transition duration-300">
-            <h3 className="text-white font-serif text-xl mb-4">Courses</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <h3 className="text-white font-serif text-2xl mb-4">Courses</h3>
+            <p className="text-gray-400  leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               euismod, nisl vel tincidunt lacinia, ligula diam fringilla lectus,
               in varius risus augue a erat. Cras at enim mi.
@@ -200,8 +176,8 @@ export default function AboutUsPage() {
 
           {/* Card 1 */}
           <div className=" bg-[linear-gradient(to_bottom,#2A2C2B_70  %,#303231_100%)] shadow-xxl shadow-black/30 p-8 rounded-md hover:bg-white/10 transition duration-300">
-            <h3 className="text-white font-serif text-xl mb-4">Courses</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <h3 className="text-white font-serif text-2xl mb-4">Courses</h3>
+            <p className="text-gray-400 leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               euismod, nisl vel tincidunt lacinia, ligula diam fringilla lectus,
               in varius risus augue a erat. Cras at enim mi.
@@ -210,8 +186,8 @@ export default function AboutUsPage() {
 
           {/* Card 1 */}
           <div className=" bg-[linear-gradient(to_bottom,#2A2C2B_70  %,#303231_100%)] shadow-xxl shadow-black/30 p-8 rounded-md hover:bg-white/10 transition duration-300">
-            <h3 className="text-white font-serif text-xl mb-4">Courses</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <h3 className="text-white font-serif text-2xl mb-4">Courses</h3>
+            <p className="text-gray-400 leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               euismod, nisl vel tincidunt lacinia, ligula diam fringilla lectus,
               in varius risus augue a erat. Cras at enim mi.
@@ -220,8 +196,8 @@ export default function AboutUsPage() {
 
           {/* Card 1 */}
           <div className=" bg-[linear-gradient(to_bottom,#2A2C2B_70  %,#303231_100%)] shadow-xxl shadow-black/30 p-8 rounded-md hover:bg-white/10 transition duration-300">
-            <h3 className="text-white font-serif text-xl mb-4">Courses</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <h3 className="text-white font-serif text-2xl mb-4">Courses</h3>
+            <p className="text-gray-400  leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               euismod, nisl vel tincidunt lacinia, ligula diam fringilla lectus,
               in varius risus augue a erat. Cras at enim mi.
@@ -231,7 +207,7 @@ export default function AboutUsPage() {
       </section>
 
       {/* ---  MEMBERS --- */}
-      <section className="py-16  px-6 md:px-12 relative overflow-hidden">
+      <section className="py-16   px-6 h-[90vh] md:px-12 relative overflow-hidden">
         {/* Decorations */}
         <Image
           src="https://res.cloudinary.com/dpqv7ag5w/image/upload/v1765888145/image_1770_vdqjbu.png"
@@ -295,7 +271,7 @@ export default function AboutUsPage() {
       </section>
 
       {/* ---  FOOTER --- */}
-      <footer className="bg-[#1a1a1a] h-[50vh] mt-15 text-gray-400 py-12 px-6 border-t border-gray-800 relative">
+      <footer className="bg-[#1a1a1a] h-[50vh]  text-gray-400 py-12 px-6 border-t border-gray-800 relative">
         <div className="absolute inset-0 bg-[url('https://res.cloudinary.com/dpqv7ag5w/image/upload/v1766052281/Footer_37_ijf3v4.png')] "></div>
 
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10 text-xs md:text-sm">
@@ -393,7 +369,7 @@ export default function AboutUsPage() {
           </div>
         </div>
         <div className="text-center mt-12 text-xs text-gray-600 relative z-10">
-          © 2025 AI Prediction Team. All rights reserved.
+          © Nhom 1 DS317.
         </div>
       </footer>
     </div>
