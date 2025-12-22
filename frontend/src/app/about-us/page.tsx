@@ -15,7 +15,8 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
-import { MEMBERS_DATA } from "./../../../../data/member";
+import { MEMBERS_DATA, OVERVIEW_DATA } from "../../../../data/research-info";
+import { Footer } from "@/components/Footer";
 
 const SnowEffect = dynamic(() => import("@/components/snow-effect"), {
   ssr: false,
@@ -94,7 +95,6 @@ export default function AboutUsPage() {
           </p>
         </Button>
       </section>
-
       {/* ---  DARK INTRO --- */}
       <section className="relative overflow-hidden min-h-screen text-white py-24 px-6 md:px-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative">
         <Image
@@ -132,7 +132,6 @@ export default function AboutUsPage() {
           </div>
         </div>
       </section>
-
       {/* ---  DATASET --- */}
       <section className="bg-[#FAF8EF] py-16 px-6 text-center">
         <h2 className="text-3xl font-bold text-[#6D8B74] uppercase tracking-widest mb-10">
@@ -160,58 +159,35 @@ export default function AboutUsPage() {
             </div>
           </div>
         </div>
-        <p className="max-w-2xl text-semibold  text-[#2A2B2C]  leading-relaxed mt-12 mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod,
-          nisl vel tincidunt lacinia, ligula diam fringilla lectus, in varius
-          risus augue a erat.
+        <p className="max-w-[60vw] text-semibold  text-[#2A2B2C]  leading-relaxed mt-12 mx-auto">
+          Our research is grounded in the massive MOOCCubeX dataset, comprising
+          granular interaction logs from millions of users across thousands of
+          courses. We extract fine-grained behavioral features—including video
+          watching patterns (pause, rewind, speed), assignment submission
+          timestamps, and discussion forum sentiment—to train robust models
+          capable of generalizing across diverse learning environments
         </p>
       </section>
-
       {/* --- CONTENT GRID --- */}
       <section className="bg-[#0F1110] h-[80vh] px-6 md:px-20 relative flex items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Card 1 */}
-          <div className=" bg-[linear-gradient(to_bottom,#2A2C2B_70  %,#303231_100%)] shadow-xxl shadow-black/30 p-8 rounded-md hover:bg-white/10 transition duration-300">
-            <h3 className="text-white font-serif text-2xl mb-4">Courses</h3>
-            <p className="text-gray-400  leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              euismod, nisl vel tincidunt lacinia, ligula diam fringilla lectus,
-              in varius risus augue a erat. Cras at enim mi.
-            </p>
-          </div>
-
-          {/* Card 1 */}
-          <div className=" bg-[linear-gradient(to_bottom,#2A2C2B_70  %,#303231_100%)] shadow-xxl shadow-black/30 p-8 rounded-md hover:bg-white/10 transition duration-300">
-            <h3 className="text-white font-serif text-2xl mb-4">Courses</h3>
-            <p className="text-gray-400 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              euismod, nisl vel tincidunt lacinia, ligula diam fringilla lectus,
-              in varius risus augue a erat. Cras at enim mi.
-            </p>
-          </div>
-
-          {/* Card 1 */}
-          <div className=" bg-[linear-gradient(to_bottom,#2A2C2B_70  %,#303231_100%)] shadow-xxl shadow-black/30 p-8 rounded-md hover:bg-white/10 transition duration-300">
-            <h3 className="text-white font-serif text-2xl mb-4">Courses</h3>
-            <p className="text-gray-400 leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              euismod, nisl vel tincidunt lacinia, ligula diam fringilla lectus,
-              in varius risus augue a erat. Cras at enim mi.
-            </p>
-          </div>
-
-          {/* Card 1 */}
-          <div className=" bg-[linear-gradient(to_bottom,#2A2C2B_70  %,#303231_100%)] shadow-xxl shadow-black/30 p-8 rounded-md hover:bg-white/10 transition duration-300">
-            <h3 className="text-white font-serif text-2xl mb-4">Courses</h3>
-            <p className="text-gray-400  leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              euismod, nisl vel tincidunt lacinia, ligula diam fringilla lectus,
-              in varius risus augue a erat. Cras at enim mi.
-            </p>
-          </div>
+          {OVERVIEW_DATA.map((card) => (
+            <div
+              key={card.id}
+              className="
+                   shadow-xxl shadow-black/30 p-8 rounded-md 
+                   hover:bg-white/10 transition duration-300"
+            >
+              <h3 className="text-white font-serif text-xl mb-4">
+                {card.title}
+              </h3>
+              <p className="text-gray-400 leading-relaxed">
+                {card.description}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
-
       {/* ---  MEMBERS --- */}
       <section className="py-16   px-6 h-[90vh] md:px-12 relative overflow-hidden">
         {/* Decorations */}
@@ -235,7 +211,7 @@ export default function AboutUsPage() {
             <h2 className="text-3xl font-serif text-[#efc69] z-10 font-bold">
               Members
             </h2>
-            <div className="m-auto w-[60vw] grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
+            <div className="m-auto w-[60vw] grid grid-cols-1 md:grid-cols-2  gap-y-10">
               {MEMBERS_DATA.map((member, index) => (
                 <div
                   key={member.id}
@@ -275,109 +251,7 @@ export default function AboutUsPage() {
           </div>
         </div>
       </section>
-
-      {/* ---  FOOTER --- */}
-      <footer className="bg-[#1a1a1a] h-[50vh]  text-gray-400 py-12 px-6 border-t border-gray-800 relative">
-        <div className="absolute inset-0 bg-[url('https://res.cloudinary.com/dpqv7ag5w/image/upload/v1766052281/Footer_37_ijf3v4.png')] "></div>
-
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10 text-xs md:text-sm">
-          <div>
-            <h4 className="text-white font-bold mb-4 uppercase">Product</h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="hover:text-white">
-                  Landing Page
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Features
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Documentation
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white font-bold mb-4 uppercase">
-              Data Sources
-            </h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="hover:text-white">
-                  Kaggle
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  University API
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Research Papers
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white font-bold mb-4 uppercase">Resources</h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="hover:text-white">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Community
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Help Center
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-white font-bold mb-4 uppercase">Social</h4>
-            <div className="flex gap-4">
-              <a href="#" className="hover:text-white">
-                <Twitter size={18} />
-              </a>
-              <a href="#" className="hover:text-white">
-                <Facebook size={18} />
-              </a>
-              <a href="#" className="hover:text-white">
-                <Instagram size={18} />
-              </a>
-              <a href="#" className="hover:text-white">
-                <Github size={18} />
-              </a>
-            </div>
-            <div className="mt-6">
-              <p className="mb-2">Subscribe to our newsletter</p>
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="bg-gray-800 border-none rounded-l px-3 py-2 text-white w-full focus:ring-1 ring-[#B93836]"
-                />
-                <button className="bg-[#B93836] text-white px-3 py-2 rounded-r hover:bg-[#8e2b29]">
-                  <ArrowRight size={16} />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="text-center mt-12 text-xs text-gray-600 relative z-10">
-          © Nhom 1 DS317.
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
