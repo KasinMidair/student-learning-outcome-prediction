@@ -13,14 +13,20 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 
 import { MEMBERS_DATA } from "./../../../../data/member";
+
+const SnowEffect = dynamic(() => import("@/components/snow-effect"), {
+  ssr: false,
+});
 
 export default function AboutUsPage() {
   const router = useRouter();
 
   return (
     <div className=" w-full font-sans overflow-x-hidden bg-[image:var(--background-gradient)] dark ">
+      <SnowEffect />
       {/* --- HERO --- */}
       <section className=" relative text-white py-40  flex flex-col items-center justify-center text-center">
         <Image
