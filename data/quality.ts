@@ -9,12 +9,12 @@ export const DQ_DATA = {
     {
       title: "Completeness",
       description:
-        "Measures the presence of data fields. The current dataset shows high sparsity (16.09%) due to the inherent nature of early student drop-outs.",
+        "Measures the percentage of fields that contain values vs. missing data. Essential for ensuring your dataset has enough information for analysis.",
     },
     {
       title: "Consistency",
       description:
-        "Evaluates adherence to logical constraints (Non-negative, Interval, Sentiment). The dataset maintains a moderate average of 60.3%.",
+        "Evaluates whether data follows defined rules and constraints. Ensures logical validity across your dataset (e.g., values within expected ranges).",
     },
   ],
 
@@ -45,7 +45,7 @@ export const DQ_DATA = {
   ],
 
   diagnostic: {
-    // phase 4 (GRU model)
+    // phase 4 (GRU model V0)
     score: 31.84,
     status: "Poor",
 
@@ -85,10 +85,10 @@ export const DQ_DATA = {
     ],
 
     footerIndicators: [
-      { label: "Performance (Sperf)", val: "82.01%", color: "text-blue-400" },
+      { label: "Performance (Sperf)", val: "82.01%", color: "text-green-400" },
       { label: "Sanity (Ssan+)", val: "7.70%", color: "text-red-400" },
-      { label: "Completeness", val: "16.09%", color: "text-yellow-400" },
-      { label: "Drift (sdrift)", val: "99.99%", color: "text-green-400" },
+      { label: "Completeness", val: "16.09%", color: "text-red-400" },
+      { label: "Drift (sdrift)", val: "99.99%", color: "text-red-400" },
     ],
   },
 };
