@@ -39,7 +39,7 @@ const YAxisTick = ({ x, y, payload }: any) => (
     fontWeight={500}
     style={{ fill: "#ffffff" }}
   >
-    {payload.value}
+    {payload.value + "%"}
   </text>
 );
 

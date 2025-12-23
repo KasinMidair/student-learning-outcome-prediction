@@ -1,84 +1,94 @@
 export const DQ_DATA = {
-  // 3 Card trên cùng
   headerStats: [
     { label: "Dataset", value: "MOOCCubeX", subtext: "Online learning source" },
     { label: "Number of rows", value: "2,324,524", subtext: "Total records" },
     { label: "Number of columns", value: "181", subtext: "Available features" },
   ],
 
-  // Nội dung Theory
   theory: [
     {
       title: "Completeness",
       description:
-        "About this course: Buscamos promover llevemos el desarrollo gfhfgh fisica de nuestros atletas... ¡Unite và juntos llevemos el a otro llevemos nivel!",
+        "Measures the presence of data fields. The current dataset shows high sparsity (16.09%) due to the inherent nature of early student drop-outs.",
     },
     {
       title: "Consistency",
       description:
-        "About this course: Buscamos promover llevemos el desarrollo gfhfgh fisica de nuestros atletas... ¡Unite và juntos llevemos el a otro llevemos nivel!",
+        "Evaluates adherence to logical constraints (Non-negative, Interval, Sentiment). The dataset maintains a moderate average of 60.3%.",
     },
   ],
 
-  // Biểu đồ cột
   barChart: [
-    { name: "Completeness", value: 85 },
-    { name: "Consistency", value: 78 },
+    { name: "Completeness", value: 16.09 },
+    { name: "Consistency", value: 60.3 },
   ],
 
   donutCharts: [
     {
       title: "Completeness Rate",
-      percent: 85,
+      percent: 16.09,
       label: "Valid",
       data: [
-        { label: "Complete", value: 85, fill: "#4ade80" },
-        { label: "Missing", value: 15, fill: "#3f3f46" },
+        { label: "Complete", value: 16.09, fill: "#4ade80" },
+        { label: "Missing", value: 83.91, fill: "#3f3f46" },
       ],
     },
     {
       title: "Consistency Rate",
-      percent: 78,
+      percent: 60.3,
       label: "Stable",
       data: [
-        { label: "Consistent", value: 78, fill: "#fbbf24" },
-        { label: "Outliers", value: 22, fill: "#3f3f46" },
+        { label: "Consistent", value: 60.3, fill: "#fbbf24" },
+        { label: "Outliers", value: 39.7, fill: "#3f3f46" },
       ],
     },
   ],
 
-  // Báo cáo chẩn đoán
   diagnostic: {
-    score: 82.5,
-    status: "Optimal",
+    // phase 4 (GRU model)
+    score: 31.84,
+    status: "Poor",
+
     radarData: [
-      { subject: "MacroF1", A: 85, fullMark: 100 },
-      { subject: "Bal-Acc", A: 78, fullMark: 100 },
-      { subject: "MCC", A: 90, fullMark: 100 },
-      { subject: "Kappa", A: 75, fullMark: 100 },
-      { subject: "S-Sanity", A: 82, fullMark: 100 },
+      { subject: "MacroF1", A: 77.2, fullMark: 100 },
+      { subject: "Bal-Acc", A: 84.2, fullMark: 100 },
+      { subject: "MCC (Norm)", A: 83.7, fullMark: 100 }, // Normalized: (0.673 + 1) / 2
+      { subject: "Kappa (Norm)", A: 83.1, fullMark: 100 }, // Normalized: (0.662 + 1) / 2
+      { subject: "S-Sanity", A: 7.7, fullMark: 100 }, // S_san+ = 0.077
     ],
+
     aiMessages: [
       {
         type: "success",
-        title: "Lành mạnh số học (snan)",
+        title: "Numerical Stability (snan = 1.0)",
         content:
-          "Không phát hiện giá trị NaN/Inf hoặc lỗi chuẩn hóa Softmax. Pipeline vận hành ổn định.",
+          "No NaN/Inf errors or Softmax normalization issues detected. The preprocessing pipeline ensures mathematical stability during training.",
+      },
+      {
+        type: "error",
+        title: "Severe Mode Collapse (smaj = 0.3%)",
+        content:
+          "Extremely low smaj indicates the model is heavily biased toward the majority class (Label 0), failing to distinguish minority patterns.",
       },
       {
         type: "warning",
-        title: "Rò rỉ tín hiệu (sleak)",
+        title: "Missingness Signal Leakage (sleak = 2.8%)",
         content:
-          "Phát hiện AUC probe 0.82. Có dấu hiệu rò rỉ tín hiệu từ biến thiếu dữ liệu.",
+          "Strong leakage detected from missing data patterns. The model is likely learning 'shortcuts' from the absence of data rather than actual behavioral features.",
+      },
+      {
+        type: "warning",
+        title: "Low Prediction Entropy (sent = 0.22%)",
+        content:
+          "The model is overconfident in its biased predictions, showing a lack of uncertainty even when classifying complex edge cases.",
       },
     ],
-    recommendation:
-      "Để tối ưu hóa điểm Acc-DQ, khuyến nghị thực hiện Adversarial Debiasing trên các cột missingness và tái cân bằng batch để xử lý độ lệch sdrift hiện tại.",
+
     footerIndicators: [
-      { label: "Hiệu năng (Sperf)", val: "0.85", color: "text-green-500" },
-      { label: "Lành mạnh (Ssan+)", val: "0.78", color: "text-yellow-500" },
-      { label: "Batch Eff (seff)", val: "0.92", color: "text-blue-500" },
-      { label: "Drift (sdrift)", val: "0.80", color: "text-purple-500" },
+      { label: "Performance (Sperf)", val: "82.01%", color: "text-blue-400" },
+      { label: "Sanity (Ssan+)", val: "7.70%", color: "text-red-400" },
+      { label: "Completeness", val: "16.09%", color: "text-yellow-400" },
+      { label: "Drift (sdrift)", val: "99.99%", color: "text-green-400" },
     ],
   },
 };

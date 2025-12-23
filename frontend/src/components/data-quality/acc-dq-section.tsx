@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, AlertCircle } from "lucide-react";
+import { CheckCircle2, AlertCircle, XCircle } from "lucide-react";
 import {
   ResponsiveContainer,
   RadarChart,
@@ -9,8 +9,6 @@ import {
   Radar,
   Tooltip,
 } from "recharts";
-
-const COLORS = ["#67AA50", "#F5B562", "#A3B79C", "#D21B1B"];
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
@@ -34,6 +32,19 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export function AccDQSection({ data }: { data: any }) {
+  const getDiagnosisIconAndColor = (type: string) => {
+    switch (type) {
+      case "success":
+        return { icon: <CheckCircle2 size={16} />, colorClass: "text-green-400" };
+      case "warning":
+        return { icon: <AlertCircle size={16} />, colorClass: "text-yellow-400" };
+      case "error":
+        return { icon: <XCircle size={16} />, colorClass: "text-red-400" };
+      default:
+        return { icon: <AlertCircle size={16} />, colorClass: "text-zinc-400" };
+    }
+  };
+
   return (
     <div className="bg-[#1a1c1b]/60 p-8 rounded-2xl border border-white/5 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden flex flex-col h-full">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 relative z-10">
@@ -53,11 +64,39 @@ export function AccDQSection({ data }: { data: any }) {
             </span>
           </div>
 
-          <div className="bg-green-500/10 border border-green-500/20 px-4 py-2 rounded-lg flex flex-col items-center justify-center min-w-[80px]">
-            <span className="text-[13px] text-green-500/70 font-semibold tracking-widest mb-1">
+          <div
+            className={`px-4 py-2 rounded-lg flex flex-col items-center justify-center min-w-[80px] border ${
+              data.status === "Poor"
+                ? "bg-red-500/10 border-red-500/20"
+                : data.status === "Warning"
+                ? "bg-yellow-500/10 border-yellow-500/20"
+                : "bg-green-500/10 border-green-500/20"
+            }`}
+          >
+            <span
+              className="text-[13px] font-semibold tracking-widest mb-1 opacity-70"
+              style={{
+                color:
+                  data.status === "Poor"
+                    ? "#f87171"
+                    : data.status === "Warning"
+                    ? "#facc15"
+                    : "#4ade80",
+              }}
+            >
               Status
             </span>
-            <span className="text-base font-bold text-green-400 leading-none uppercase">
+            <span
+              className="text-base font-bold leading-none uppercase"
+              style={{
+                color:
+                  data.status === "Poor"
+                    ? "#f87171"
+                    : data.status === "Warning"
+                    ? "#facc15"
+                    : "#4ade80",
+              }}
+            >
               {data.status}
             </span>
           </div>
@@ -67,7 +106,15 @@ export function AccDQSection({ data }: { data: any }) {
       {/* chart */}
       <div className="flex-1 flex flex-col relative z-10">
         <div className="w-full flex justify-center items-center relative py-4 min-h-[300px]">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] bg-yellow-500/10 blur-[50px] rounded-full pointer-events-none" />
+          <div
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] blur-[50px] rounded-full pointer-events-none ${
+              data.status === "Poor"
+                ? "bg-red-500/10"
+                : data.status === "Warning"
+                ? "bg-yellow-500/10"
+                : "bg-green-500/10"
+            }`}
+          />
 
           <div className="w-full h-[300px] max-w-[500px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -80,9 +127,21 @@ export function AccDQSection({ data }: { data: any }) {
                 <Radar
                   name="Metrics"
                   dataKey="A"
-                  stroke="#eab308"
+                  stroke={
+                    data.status === "Poor"
+                      ? "#f87171"
+                      : data.status === "Warning"
+                      ? "#facc15"
+                      : "#4ade80"
+                  }
                   strokeWidth={2}
-                  fill="#eab308"
+                  fill={
+                    data.status === "Poor"
+                      ? "#f87171"
+                      : data.status === "Warning"
+                      ? "#facc15"
+                      : "#4ade80"
+                  }
                   fillOpacity={0.3}
                   isAnimationActive={true}
                 />
@@ -99,43 +158,33 @@ export function AccDQSection({ data }: { data: any }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {data.aiMessages.map((msg: any, i: number) => (
-              <div
-                key={i}
-                className="bg-white/5 hover:bg-white/10 border border-white/5 rounded-lg p-3 transition-colors duration-200"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="mt-0.5">
-                    {msg.type === "success" ? (
-                      <CheckCircle2 size={16} className="text-green-500" />
-                    ) : (
-                      <AlertCircle size={16} className="text-orange-500" />
-                    )}
-                  </div>
-                  <div>
-                    <h4
-                      className={`text-sm font-bold ${
-                        msg.type === "success" ? "text-green-400" : "text-orange-400"
-                      } mb-1`}
-                    >
-                      {msg.title}
-                    </h4>
-                    <p className="text-[13px] text-zinc-400 leading-relaxed">
-                      {msg.content}
-                    </p>
+            {data.aiMessages.map((msg: any, i: number) => {
+              const { icon, colorClass } = getDiagnosisIconAndColor(msg.type);
+              return (
+                <div
+                  key={i}
+                  className="bg-white/5 hover:bg-white/10 border border-white/5 rounded-lg p-3 transition-colors duration-200"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className={`mt-0.5 ${colorClass}`}>{icon}</div>
+                    <div>
+                      <h4 className={`text-sm font-bold ${colorClass} mb-1`}>
+                        {msg.title}
+                      </h4>
+                      <p className="text-[13px] text-zinc-400 leading-relaxed">
+                        {msg.content}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
-        {/* footer */}
         <div className="mt-7 pt-6 border-t border-white/5">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 place-items-center">
             {data.footerIndicators.map((item: any, idx: number) => {
-              const color = COLORS[idx % COLORS.length];
-
               return (
                 <div
                   key={idx}
@@ -145,7 +194,7 @@ export function AccDQSection({ data }: { data: any }) {
                     {item.label}
                   </span>
 
-                  <span className="text-lg font-mono font-semibold" style={{ color }}>
+                  <span className={`text-lg font-mono font-semibold ${item.color}`}>
                     {item.val}
                   </span>
                 </div>
