@@ -30,40 +30,43 @@ import { CustomPieChart } from "@/components/pie-chart";
 
 const lineData = [
   [
-    { name: "Jan", score: 1000 },
-    { name: "Feb", score: 300 },
-    { name: "Mar", score: 550 },
-    { name: "Apr", score: 450 },
-    { name: "May", score: 600 },
-    { name: "Jun", score: 700 },
+    { name: "Jun 2020", score: 66668 },
+    { name: "Jul 2020", score: 61372 },
+    { name: "Aug 2020", score: 94924 },
+    { name: "Sep 2020", score: 243650 },
+    { name: "Oct 2020", score: 31650 },
+    { name: "Nov 2020", score: 22438 },
+    { name: "Dec 2020", score: 794 },
   ],
 ];
 
 const labelData = [
-  { name: "Excellent", value: 12, color: "#67AA50" },
-  { name: "Good", value: 21, color: "#EFC690" },
-  { name: "Failed", value: 67, color: "#F5B562" },
+  { name: "Excellent", value: 0.1, color: "#67AA50" },
+  { name: "Good", value: 0.26, color: "#EFC690" },
+  { name: "Failed", value: 99.64, color: "#F5B562" },
 ];
 
 const barChartData = [
-  { name: "1/2020", rate: 40 },
-  { name: "3/2021", rate: 60 },
-  { name: "3/2021", rate: 30 },
-  { name: "3/2021", rate: 80 },
-  { name: "3/2021", rate: 55 },
-  { name: "3/2021", rate: 90 },
-  { name: "3/2021", rate: 70 },
+  { name: "06/2020", rate: 30 },
+  { name: "07/2020", rate: 96 },
+  { name: "08/2020", rate: 20 },
+  { name: "09/2020", rate: 80 },
+  { name: "10/2020", rate: 55 },
+  { name: "11/2020", rate: 90 },
+  { name: "12/2020", rate: 70 },
 ];
 
 const courseData = [
-  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
-  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
-  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
-  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
-  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
-  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
-  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
-  { courseId: "C_345434", totalRegistration: 40, passRate: 20 },
+  { courseId: "C_936971", totalRegistration: 209703, passRate: 12 },
+  { courseId: "C_697791", totalRegistration: 92350, passRate: 18 },
+  { courseId: "C_801420", totalRegistration: 33911, passRate: 25 },
+  { courseId: "C_696942", totalRegistration: 31335, passRate: 22 },
+  { courseId: "C_696597", totalRegistration: 27996, passRate: 15 },
+  { courseId: "C_707373", totalRegistration: 27470, passRate: 30 },
+  { courseId: "C_696724", totalRegistration: 26440, passRate: 19 },
+  { courseId: "C_947252", totalRegistration: 21917, passRate: 17 },
+  { courseId: "C_707456", totalRegistration: 21140, passRate: 23 },
+  { courseId: "C_1822804", totalRegistration: 20058, passRate: 14 },
 ];
 
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -89,13 +92,13 @@ const stats = [
   },
   {
     label: "Total Students",
-    val: "3,243",
+    val: "2,324,544",
     sub: "active in system",
     icon: Users,
   },
   {
     label: "Avg Score",
-    val: "8.4",
+    val: "0.66",
     sub: "+2.1% from last month",
     icon: GraduationCap,
   },
@@ -159,12 +162,12 @@ export default function OverviewPage() {
                       strokeWidth="14"
                       fill="transparent"
                       strokeDasharray={377}
-                      strokeDashoffset={377 - (377 * 25) / 100}
+                      strokeDashoffset={377 - (377 * 0.1) / 100}
                       className="text-green-500 transition-all duration-1000 ease-out"
                     />
                   </svg>
                   <div className="absolute text-center">
-                    <span className="text-3xl font-bold ">25%</span>
+                    <span className="text-3xl font-bold ">0.1%</span>
                   </div>
                 </div>
                 <p className="text-sm text-zinc-400">
