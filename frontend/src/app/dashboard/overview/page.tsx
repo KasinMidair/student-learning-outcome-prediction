@@ -30,7 +30,7 @@ import { CustomPieChart } from "@/components/pie-chart";
 
 const lineData = [
   [
-    { name: "Jan", score: 400 },
+    { name: "Jan", score: 1000 },
     { name: "Feb", score: 300 },
     { name: "Mar", score: 550 },
     { name: "Apr", score: 450 },
